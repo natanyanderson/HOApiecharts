@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+</head>
+<body >
+    <div id="1cd925f771db4743b3b81d2fa71d4512" class="chart-container" style="width:900px; height:500px; "></div>
+    <script>
+        var chart_1cd925f771db4743b3b81d2fa71d4512 = echarts.init(
+            document.getElementById('1cd925f771db4743b3b81d2fa71d4512'), 'white', {renderer: 'canvas'});
+        var option_1cd925f771db4743b3b81d2fa71d4512 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "pie",
+            "colorBy": "data",
+            "legendHoverLink": true,
+            "selectedMode": false,
+            "selectedOffset": 10,
+            "clockwise": true,
+            "startAngle": 90,
+            "minAngle": 0,
+            "minShowLabelAngle": 0,
+            "avoidLabelOverlap": true,
+            "stillShowZeroSum": true,
+            "percentPrecision": 2,
+            "showEmptyCircle": true,
+            "emptyCircleStyle": {
+                "color": "lightgray",
+                "borderColor": "#000",
+                "borderWidth": 0,
+                "borderType": "solid",
+                "borderDashOffset": 0,
+                "borderCap": "butt",
+                "borderJoin": "bevel",
+                "borderMiterLimit": 10,
+                "opacity": 1
+            },
+            "data": [
+                {
+                    "name": "Office expenses",
+                    "value": 6244
+                },
+                {
+                    "name": "Professional Fees",
+                    "value": 3201
+                },
+                {
+                    "name": "Management",
+                    "value": 44368
+                },
+                {
+                    "name": "Water",
+                    "value": 14491
+                },
+                {
+                    "name": "Utilities",
+                    "value": 8822
+                },
+                {
+                    "name": "Insurance",
+                    "value": 110011
+                },
+                {
+                    "name": "Landscaping, Grounds, & Snow",
+                    "value": 223891
+                },
+                {
+                    "name": "Equipment",
+                    "value": 325
+                },
+                {
+                    "name": "Plumbing, Sewers, and Drains",
+                    "value": 639
+                },
+                {
+                    "name": "Exterminating",
+                    "value": 2717
+                },
+                {
+                    "name": "Gutters",
+                    "value": 3450
+                },
+                {
+                    "name": "Pool Expenses",
+                    "value": 21543
+                },
+                {
+                    "name": "Electrical",
+                    "value": 0
+                },
+                {
+                    "name": "Paving",
+                    "value": 13276
+                },
+                {
+                    "name": "Janitorial",
+                    "value": 1465
+                },
+                {
+                    "name": "Fence",
+                    "value": 14275
+                },
+                {
+                    "name": "Other repairs and maintenance",
+                    "value": 12705
+                },
+                {
+                    "name": "Corporate Taxes",
+                    "value": 645
+                }
+            ],
+            "radius": [
+                "40%",
+                "60%"
+            ],
+            "center": [
+                "66%",
+                "70%"
+            ],
+            "label": {
+                "show": true,
+                "position": "outside",
+                "margin": 8,
+                "formatter": function(params){return params.name + ': $' + params.value.toLocaleString();}
+            },
+            "labelLine": {
+                "show": true,
+                "showAbove": false,
+                "length": 15,
+                "length2": 15,
+                "smooth": false,
+                "minTurnAngle": 90,
+                "maxSurfaceAngle": 90
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "Office expenses",
+                "Professional Fees",
+                "Management",
+                "Water",
+                "Utilities",
+                "Insurance",
+                "Landscaping, Grounds, & Snow",
+                "Equipment",
+                "Plumbing, Sewers, and Drains",
+                "Exterminating",
+                "Gutters",
+                "Pool Expenses",
+                "Electrical",
+                "Paving",
+                "Janitorial",
+                "Fence",
+                "Other repairs and maintenance",
+                "Corporate Taxes"
+            ],
+            "selected": {},
+            "show": false,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "title": [
+        {
+            "show": true,
+            "text": "Expenses Distribution for 2020",
+            "target": "blank",
+            "subtext": "Revenue:\n  Assessments: $82,528\n  HOA dues: $574,464\n  Interest Income: $1,874\n  Other revenue: $3,704\n  Total Revenue: $662,570\n\nTotal Expenses: $482,068\n\nIncome from operations:\n  Interest expense on loan: $13,933\n  Major repairs - Lighting Project: $1,840\n  Major repairs - Pool furniture: $0\n\nNet Profit (Loss): $164,729",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false,
+            "textStyle": {
+                "fontWeight": "bold",
+                "fontSize": 20
+            },
+            "subtextStyle": {
+                "fontWeight": "bold",
+                "fontSize": 15
+            }
+        }
+    ]
+};
+        chart_1cd925f771db4743b3b81d2fa71d4512.setOption(option_1cd925f771db4743b3b81d2fa71d4512);
+    </script>
+</body>
+</html>

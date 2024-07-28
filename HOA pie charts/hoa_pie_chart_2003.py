@@ -5,42 +5,42 @@ import os
 from pyecharts.commons.utils import JsCode
 
 # Prepare data for the pie chart
-expenses_2004 = {
-    "Administrative Expense": 8898,
-    "Professional Fees": 5209,
-    "Insurance": 59614,
-    "Management": 31642,
-    "Landscaping, Grounds, and Drainage": 148355,
-    "Supplies": 263,
-    "Water": 2259,
-    "Interest Expense": 11186,
-    "Payroll and Related Expenses": 7549,
-    "Electrical Repairs": 1100,
-    "Plumbing": 489,
-    "Exterminator": 2592,
-    "Speed Bumps": 3819,
-    "Cleaning": 6114,
-    "Building Repairs": 2848,
-    "Pool Expenses": 7793,
-    "Alarm Monitoring": 1399,
-    "Utilities": 8133,
-    "Telephone": 1398,
-    "Licenses": 250,
-    "Provision for State Income Taxes": 89
+expenses_2003 = {
+    "Administrative Expense": 12433,
+    "Professional Fees": 3313,
+    "Insurance": 56341,
+    "Management": 30418,
+    "Landscaping, Grounds, and Drainage": 122745,
+    "Supplies": 560,
+    "Water": 2429,
+    "Interest Expense": 11938,
+    "Payroll and Related Expenses": 9973,
+    "Electrical Repairs": 0,
+    "Plumbing": 608,
+    "Exterminator": 2987,
+    "Speed Bumps": 0,
+    "Cleaning": 4938,
+    "Building Repairs": 5530,
+    "Pool Expenses": 6064,
+    "Alarm Monitoring": 996,
+    "Utilities": 8565,
+    "Telephone": 1318,
+    "Licenses": 61,
+    "Provision for State Income Taxes": 33
 }
 
 # Income and Net Profit (Loss) data
 income_data = {
-    "Interest Income": 55,
-    "Other Income": 300,
-    "Common Charges (Note 1)": 331735,
-    "Total Revenues": 332090,
-    "Total Expenses": 310999,
-    "Net Profit (Loss)": 21091
+    "Interest Income": 144,
+    "Other Income": 353,
+    "Common Charges (Note 1)": 253417,
+    "Total Revenues": 253914,
+    "Total Expenses": 281250,
+    "Net Profit (Loss)": 27336
 }
 
 # Create a list of tuples for the data
-data = list(expenses_2004.items())
+data = list(expenses_2003.items())
 
 # Create a Pie chart with pyecharts
 pie_chart = (
@@ -57,7 +57,7 @@ pie_chart = (
     )
     .set_global_opts(
         title_opts=opts.TitleOpts(
-            title="Expenses Distribution for 2004",
+            title="Expenses Distribution for 2003",
             subtitle=(
                 f"Income:\n"
                 f"  Interest Income: ${income_data['Interest Income']:,}\n"
@@ -75,7 +75,7 @@ pie_chart = (
 )
 
 # Render the chart to a file
-file_path = 'expenses_pie_chart_2004.html'
+file_path = 'expenses_pie_chart_2003.html'
 pie_chart.render(file_path)
 
 # Get the absolute file path

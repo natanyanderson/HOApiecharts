@@ -5,42 +5,45 @@ import os
 from pyecharts.commons.utils import JsCode
 
 # Prepare data for the pie chart
-expenses_2004 = {
-    "Administrative Expense": 8898,
-    "Professional Fees": 5209,
-    "Insurance": 59614,
-    "Management": 31642,
-    "Landscaping, Grounds, and Drainage": 148355,
-    "Supplies": 263,
-    "Water": 2259,
-    "Interest Expense": 11186,
-    "Payroll and Related Expenses": 7549,
-    "Electrical Repairs": 1100,
-    "Plumbing": 489,
-    "Exterminator": 2592,
-    "Speed Bumps": 3819,
-    "Cleaning": 6114,
-    "Building Repairs": 2848,
-    "Pool Expenses": 7793,
-    "Alarm Monitoring": 1399,
-    "Utilities": 8133,
-    "Telephone": 1398,
-    "Licenses": 250,
-    "Provision for State Income Taxes": 89
+expenses_2011 = {
+    "Administrative Expense": 4632,
+    "Professional Fees": 13379,
+    "Engineering": 27242,
+    "Insurance": 88662,
+    "Management": 38246,
+    "Landscaping, Grounds, and Drainage": 197991,
+    "Water": 6530,
+    "Interest Expense": 8929,
+    "Electrical Repairs": 12580,
+    "Plumbing": 3785,
+    "Exterminator": 2742,
+    "Exercise Equipment": 1449,
+    "Cleaning": 4922,
+    "Building Repairs": 12963,
+    "Pool Expenses": 22039,
+    "Gutters and leaders": 6900,
+    "Sprinklers": 10752,
+    "Paint and plaster": 1717,
+    "Alarm Monitoring and repairs": 1574,
+    "Utilities": 7998,
+    "Telephone and cable": 1583,
+    "Seal coating": 0,
+    "Licenses": 318,
+    "Provision for State Income Taxes": 375
 }
 
 # Income and Net Profit (Loss) data
 income_data = {
-    "Interest Income": 55,
-    "Other Income": 300,
-    "Common Charges (Note 1)": 331735,
-    "Total Revenues": 332090,
-    "Total Expenses": 310999,
-    "Net Profit (Loss)": 21091
+    "Interest Income": 862,
+    "Other Income": 705,
+    "Common Charges (Note 1)": 443904,
+    "Total Revenues": 445471,
+    "Total Expenses": 477308,
+    "Net Profit (Loss)": 31837
 }
 
 # Create a list of tuples for the data
-data = list(expenses_2004.items())
+data = list(expenses_2011.items())
 
 # Create a Pie chart with pyecharts
 pie_chart = (
@@ -49,7 +52,7 @@ pie_chart = (
         "",
         data,
         radius=["40%", "70%"],
-        center=["60%", "60%"],  # Move the pie chart down
+        center=["60%", "65%"],  # Move the pie chart down
         label_opts=opts.LabelOpts(
             formatter=JsCode("function(params){return params.name + ': $' + params.value.toLocaleString();}"),
             position="outside"
@@ -57,7 +60,7 @@ pie_chart = (
     )
     .set_global_opts(
         title_opts=opts.TitleOpts(
-            title="Expenses Distribution for 2004",
+            title="Expenses Distribution for 2011",
             subtitle=(
                 f"Income:\n"
                 f"  Interest Income: ${income_data['Interest Income']:,}\n"
@@ -75,7 +78,7 @@ pie_chart = (
 )
 
 # Render the chart to a file
-file_path = 'expenses_pie_chart_2004.html'
+file_path = 'expenses_pie_chart_2011.html'
 pie_chart.render(file_path)
 
 # Get the absolute file path
