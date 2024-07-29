@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare HOA Expenses Pie Charts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .iframe-container {
+            width: 49%;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare HOA Expenses Pie Charts for Selected Years</h1>
+    <div>
+        <label for="year1">Year 1:</label>
+        <select id="year1">
+            <!-- Options will be added by JavaScript -->
+        </select>
+        <label for="year2">Year 2:</label>
+        <select id="year2">
+            <!-- Options will be added by JavaScript -->
+        </select>
+    </div>
+    <div class="container">
+        <div class="iframe-container">
+            <iframe id="iframe1" src=""></iframe>
+        </div>
+        <div class="iframe-container">
+            <iframe id="iframe2" src=""></iframe>
+        </div>
+    </div>
+    <script>
+        // Define the range of years for the files
+        const years = Array.from({length: 21}, (_, i) => 2002 + i);
+
+        // Get dropdown elements
+        const year1Dropdown = document.getElementById('year1');
+        const year2Dropdown = document.getElementById('year2');
+
+        // Populate dropdowns with year options
+        years.forEach(year => {
+            const option1 = document.createElement('option');
+            option1.value = year;
+            option1.textContent = year;
+            year1Dropdown.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = year;
+            option2.textContent = year;
+            year2Dropdown.appendChild(option2);
+        });
+
+        // Set initial values
+        year1Dropdown.value = 2003;
+        year2Dropdown.value = 2022;
+
+        // Update iframes based on selected years
+        function updateIframes() {
+            const year1 = year1Dropdown.value;
+            const year2 = year2Dropdown.value;
+            document.getElementById('iframe1').src = `https://raw.githack.com/natanyanderson/HOApiecharts/main/HOA%20pie%20charts/expenses_pie_chart_${year1}.html`;
+            document.getElementById('iframe2').src = `https://raw.githack.com/natanyanderson/HOApiecharts/main/HOA%20pie%20charts/expenses_pie_chart_${year2}.html`;
+        }
+
+        // Add event listeners to dropdowns
+        year1Dropdown.addEventListener('change', updateIframes);
+        year2Dropdown.addEventListener('change', updateIframes);
+
+        // Initial iframe update
+        updateIframes();
+    </script>
+</body>
+</html>
