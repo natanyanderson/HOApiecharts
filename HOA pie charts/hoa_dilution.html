@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HOA Voting Data</title>
+    <!-- Import ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div id="boardDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="sizeDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="dilutedRepresentation" style="width: 600px; height: 400px;"></div>
+    <script type="text/javascript">
+        var boardDistributionChart = echarts.init(document.getElementById('boardDistribution'));
+        var sizeDistributionChart = echarts.init(document.getElementById('sizeDistribution'));
+        var dilutedRepresentationChart = echarts.init(document.getElementById('dilutedRepresentation'));
+
+        var boardDistributionOption = {
+            title: {
+                text: 'Board Member Distribution',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Board Members',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {value: 1, name: 'Condo 1 (1)'},
+                        {value: 1, name: 'Condo 2 (1)'},
+                        {value: 1, name: 'Condo 3 (1)'},
+                        {value: 3, name: 'Condo 4 (3)'},
+                        {value: 1, name: 'At Large (1)'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        var sizeDistributionOption = {
+            title: {
+                text: 'Number of units per condo',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Votes',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {value: 18, name: 'Condo 1 (18)'},
+                        {value: 11, name: 'Condo 2 (11)'},
+                        {value: 9, name: 'Condo 3 (9)'},
+                        {value: 98, name: 'Condo 4 (98)'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        var dilutedRepresentationOption = {
+            title: {
+                text: 'Board Voting Power (based on size)',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Voting Power',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {value: 1/18, name: 'Condo 1 (1/18)'},
+                        {value: 1/11, name: 'Condo 2 (1/11)'},
+                        {value: 1/9, name: 'Condo 3 (1/9)'},
+                        {value: 3/98, name: 'Condo 4 (3/98)'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        boardDistributionChart.setOption(boardDistributionOption);
+        sizeDistributionChart.setOption(sizeDistributionOption);
+        dilutedRepresentationChart.setOption(dilutedRepresentationOption);
+    </script>
+</body>
+</html>
