@@ -1,24 +1,53 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>HOA Voting Data</title>
-    <!-- Import RequireJS -->
-    <script data-main="main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-</head>
-<body>
-    <div id="boardDistribution" style="width: 600px; height: 400px;"></div>
-    <div id="sizeDistribution" style="width: 600px; height: 400px;"></div>
-    <div id="fiancialDistribution" style="width: 600px; height: 400px;"></div>
-    <div id="dilutedRepresentation" style="width: 600px; height: 400px;"></div>
     <script type="text/javascript">
-        requirejs.config({
-            paths: {
-                echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min'
+        function loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            
+            if (script.readyState) {  // IE
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  // Others
+                script.onload = function () {
+                    callback();
+                };
             }
+            
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+        // Load RequireJS asynchronously
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js", function () {
+            console.log('RequireJS loaded.');
+
+            requirejs.config({
+                paths: {
+                    echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
+                    data: 'datadilution.js' // Update with the correct path to your data.js file
+                }
+            });
+
+            // Load ECharts and the data module
+            requirejs(['echarts', 'datadilution'], function(echarts, data) {
+                renderCharts(echarts, data);
+            });
         });
 
-        require(['echarts', 'datadilution'], function(echarts, data) {
+        function renderCharts(echarts, data) {
+            if (typeof echarts === 'undefined') {
+                console.error('ECharts library not loaded.');
+                return;
+            }
+
             var boardDistributionChart = echarts.init(document.getElementById('boardDistribution'));
             var sizeDistributionChart = echarts.init(document.getElementById('sizeDistribution'));
             var fiancialDistributionChart = echarts.init(document.getElementById('fiancialDistribution'));
@@ -144,7 +173,13 @@
             sizeDistributionChart.setOption(sizeDistributionOption);
             dilutedRepresentationChart.setOption(dilutedRepresentationOption);
             fiancialDistributionChart.setOption(fiancialDistributionOption);
-        });
+        }
     </script>
+</head>
+<body>
+    <div id="boardDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="sizeDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="fiancialDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="dilutedRepresentation" style="width: 600px; height: 400px;"></div>
 </body>
 </html>
