@@ -30,7 +30,6 @@ define([], function() {
                 "\tOther Income": 353,
                 "\tCommon Charges (Note 1)": 253417,
                 "\tTotal Revenue": 253914,
-                "": null,
                 "Total Expenses": 281250,
                 "Net Profit (Loss)": 27336
             }
@@ -65,7 +64,6 @@ define([], function() {
                 "\tOther Income": 300,
                 "\tCommon Charges (Note 1)": 331735,
                 "\tTotal Revenue": 332090,
-                "": null,
                 "Total Expenses": 310999,
                 "Net Profit (Loss)": 21091
             }
@@ -102,7 +100,6 @@ define([], function() {
                 "\tAssessments": 40800,
                 "\tCommon Charges (Note 1)": 358160,
                 "\tTotal Revenue": 399993,
-                "": null,
                 "Total Expenses": 337051,
                 "Net Profit (Loss)": 72942
             }
@@ -143,7 +140,6 @@ define([], function() {
                 "\tSettlement with Sponsor": 17770,
                 "\tCommon Charges (Note 1)": 387355,
                 "\tTotal Revenue": 406905,
-                "": null,
                 "Total Expenses": 377029,
                 "Net Profit (Loss)": 29876
             }
@@ -183,7 +179,6 @@ define([], function() {
                 "\tOther Income": 328,
                 "\tSettlement with Sponsor": 0,
                 "\tCommon Charges (Note 1)": 387355,
-                "": null,
                 "\tTotal Revenue": 390548,
                 "Total Expenses": 407813,
                 "Net Profit (Loss)": 17265
@@ -224,7 +219,6 @@ define([], function() {
                 "\tOther Income": 912,
                 "\tCommon Charges (Note 1)": 387355,
                 "\tTotal Revenue": 390111,
-                "": null,
                 "Total Expenses": 372654,
                 "Net Profit (Loss)": 17457
             }
@@ -262,7 +256,6 @@ define([], function() {
                 "\tOther Income": 961,
                 "\tCommon Charges (Note 1)": 427584,
                 "\tTotal Revenue": 430351,
-                "": null,
                 "Total Expenses": 365227,
                 "Net Profit (Loss)": 65124
             }
@@ -299,7 +292,6 @@ define([], function() {
                 "\tOther Income": 206,
                 "\tCommon Charges (Note 1)": 427584,
                 "\tTotal Revenue": 429445,
-                "": null,
                 "Total Expenses": 397583,
                 "Net Profit (Loss)": 31862
             }
@@ -337,7 +329,6 @@ define([], function() {
                 "\tOther Income": 705,
                 "\tCommon Charges (Note 1)": 443904,
                 "\tTotal Revenue": 445471,
-                "": null,
                 "Total Expenses": 477308,
                 "Net Profit (Loss)": 31837
             }
@@ -374,7 +365,6 @@ define([], function() {
                 "\tOther Income": 5798,
                 "\tCommon Charges (Note 1)": 460224,
                 "\tTotal Revenue": 466587,
-                "": null,
                 "Total Expenses": 465710,
                 "Net Profit (Loss)": 877
             }
@@ -414,7 +404,6 @@ define([], function() {
                 "\tOther Income": 100,
                 "\tCommon Charges (Note 1)": 460224,
                 "\tTotal Revenue": 630195,
-                "": null,
                 "Total Expenses": 1067212,
                 "Net Profit (Loss)": 437017
             }
@@ -456,7 +445,6 @@ define([], function() {
                 "\tOther Income": 81,
                 "\tCommon Charges (Note 1)": 460224,
                 "\tTotal Revenue": 517738,
-                "": null,
                 "Total Expenses": 605914,
                 "Net Profit (Loss)": 88176
             }
@@ -499,7 +487,6 @@ define([], function() {
                 "\tOther Income": 645,
                 "\tCommon Charges (Note 1)": 476554,
                 "\tTotal Revenue": 568996,
-                "": null,
                 "Total Expenses": 454917,
                 "Net Profit (Loss)": 114079
             }
@@ -541,7 +528,6 @@ define([], function() {
                 "\tOther Income": 104,
                 "\tCommon Charges (Note 1)": 491504,
                 "\tTotal Revenue": 549484,
-                "": null,
                 "Total Expenses": 457409,
                 "Net Profit (Loss)": 92075
             }
@@ -580,7 +566,6 @@ define([], function() {
                 "\tOther Income": 332,
                 "\tCommon Charges (Note 1)": 509184,
                 "\tTotal Revenue": 575703,
-                "": null,
                 "Total Expenses": 464194,
                 "Net Profit (Loss)": 111509
             }
@@ -613,13 +598,11 @@ define([], function() {
                 "\tInterest Income": 1879,
                 "\tOther revenue": 346,
                 "\tTotal Revenue": 592490,
-                "": null,
                 "Total Expenses": 510163,
                 "Income from operations": null,
                 "\tInterest expense on loan": 20317,
                 "\tMajor repairs - Drainage": 25448,
                 "\tMajor repairs - Water Meter Pit": 13300,
-                "": null,
                 "Net Profit (Loss)": 23262
             }
         },
@@ -651,7 +634,6 @@ define([], function() {
                 "\tInterest Income": 3428,
                 "\tOther revenue": 0,
                 "\tTotal Revenue": 627780,
-                "": null,
                 "Total Expenses": 473219,
                 "Income from operations": null,
                 "\tInterest expense on loan": 17189,
@@ -659,7 +641,6 @@ define([], function() {
                 "\tMajor repairs - Lighting Project": 8776,
                 "\tMajor repairs - Water Meter Pit": 0,
                 "\tMajor repairs - Pool furniture": 17018,
-                "": null,
                 "Net Profit (Loss)": 111578
             }
         },
@@ -691,14 +672,11 @@ define([], function() {
                 "\tInterest Income": 1874,
                 "\tOther revenue": 3704,
                 "\tTotal Revenue": 662570,
-                "": null,
                 "Total Expenses": 482068,
-                "": null,
                 "Income from operations": null,
                 "\tInterest expense on loan": 13933,
                 "\tMajor repairs - Lighting Project": 1840,
                 "\tMajor repairs - Pool furniture": 0,
-                "": null,
                 "Net Profit (Loss)": 164729
             }
         },
@@ -730,13 +708,10 @@ define([], function() {
                 "\tInterest Income": 558,
                 "\tOther revenue": 0,
                 "\tTotal Revenue": 682030,
-                "": null,
                 "Total Expenses": 528881,
-                "": null,
                 "Income from operations": null,
                 "\tInterest expense on loan": 10415,
                 "\tMajor repairs - Lighting Project": 0,
-                "": null,
                 "Net Profit (Loss)": 142734
             }
         },
@@ -766,7 +741,6 @@ define([], function() {
                 "\tInterest Income": 3025,
                 "\tHOA dues income": 449232,
                 "\tOther revenue": 978,
-                "": null,
                 "Total Revenue": 627000,
                 "Total Expenses": 688220,
                 "Income from operations": 61220,

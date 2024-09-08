@@ -77,6 +77,23 @@ function loadScript(url, callback) {
             return  Object.keys(yearlydata[year].expenses);
         }        
 
+        function generateSubtext(income) {
+
+            const subData = Object.keys(income).map(key => {
+                if (income[key]) {
+                    return key.toLocaleString() + ": " + income[key].toLocaleString();
+                } else {
+                    return key.toLocaleString();
+                }
+            });
+
+            console.log("generateSubtext: subData=", subData);
+
+            const result = subData.join('\n');
+
+            return result;
+        }
+
         function renderCharts(echarts, encrypteddata, inyearlydata, CryptoJS) {
             if (typeof echarts === 'undefined') {
                 console.error('ECharts library not loaded.');
@@ -104,23 +121,6 @@ function loadScript(url, callback) {
             const expensesData = convertDataToEcharts(yearlydata, year);
 
             const legendData = convertDataToLegend(yearlydata, year);
-
-            function generateSubtext(income) {
-
-                const subData = Object.keys(income).map(key => {
-                    if (income[key]) {
-                        return key.toLocaleString() + ": " + income[key].toLocaleString();
-                    } else {
-                        return key.toLocaleString();
-                    }
-                });
-
-                console.log("generateSubtext: subData=", subData);
-
-                const result = subData.join('\n');
-
-                return result;
-            }
 
             const subTextData = generateSubtext(yearlydata[year].income);
 
@@ -248,7 +248,7 @@ function loadScript(url, callback) {
                 },
                 "title": [
                     {
-                        "show": true,
+                        "show": false,
                         "text": "Expenses Distribution for " + year,
                         "target": "blank",
                         "subtext": subTextData,
@@ -271,6 +271,24 @@ function loadScript(url, callback) {
             };
         
             mychart.setOption(option);
+
+            // Add event listener for mouseover (show title)
+            mychart.on('mouseover', function () {
+                mychart.setOption({
+                    title: {
+                        show: true  // Show the title when mouse is over the chart
+                    }
+                });
+            });
+
+            // Add event listener for mouseout (hide title)
+            mychart.on('mouseout', function () {
+                mychart.setOption({
+                    title: {
+                        show: false  // Hide the title when mouse leaves the chart
+                    }
+                });
+            });
         }
 
     </script>
