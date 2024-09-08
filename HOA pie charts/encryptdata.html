@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt Text with CryptoJS</title>
+    <script src="scripts/crypto-js.min.js"></script> <!-- Load CryptoJS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .output {
+            word-wrap: break-word;
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Encrypt Your Data Using CryptoJS</h2>
+
+    <!-- Password Input -->
+    <label for="password">Enter Password:</label>
+    <input type="password" id="password" placeholder="Enter password">
+
+    <!-- Blob Input -->
+    <label for="blob">Enter Text to Encrypt (Blob):</label>
+    <textarea id="blob" placeholder="Enter your text here" rows="5"></textarea>
+
+    <!-- Encrypt Button -->
+    <button onclick="encryptData()">Encrypt Data</button>
+
+    <!-- Output Section -->
+    <h3>Encrypted Data:</h3>
+    <div id="output" class="output"></div>
+</div>
+
+<script>
+    // Function to encrypt data using CryptoJS
+    function encryptData() {
+        // Get the password and blob from the input fields
+        const password = document.getElementById('password').value;
+        const blob = document.getElementById('blob').value;
+
+        // Check if both password and blob are provided
+        if (!password || !blob) {
+            document.getElementById('output').innerHTML = "Please enter both a password and text to encrypt.";
+            return;
+        }
+
+        // Encrypt the blob using the password with AES encryption
+        const encrypted = CryptoJS.AES.encrypt(blob, password).toString();
+
+        // Display the encrypted data in the output div
+        document.getElementById('output').innerHTML = encrypted;
+    }
+</script>
+
+</body>
+</html>

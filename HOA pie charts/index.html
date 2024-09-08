@@ -21,10 +21,20 @@
             height: 600px;
             border: none;
         }
+        .password-prompt {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Compare HOA Expenses Pie Charts for Selected Years</h1>
+
+    <div class="password-prompt">
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password" placeholder="Enter password" />
+        <button onclick="submitPassword()">Submit</button>
+    </div>
+
     <div>
         <label for="year1">Year 1:</label>
         <select id="year1">
@@ -43,7 +53,10 @@
             <iframe id="iframe2" src=""></iframe>
         </div>
     </div>
+
     <script>
+        let password = '';
+
         // Define the range of years for the files
         const years = Array.from({length: 21}, (_, i) => 2003 + i);
 
@@ -68,20 +81,35 @@
         year1Dropdown.value = 2003;
         year2Dropdown.value = 2022;
 
-        // Update iframes based on selected years
+        // Prompt for password and update iframes when password is entered
+        function submitPassword() {
+            password = document.getElementById('password').value;
+            if (!password) {
+                alert('Please enter a password!');
+                return;
+            }
+            updateIframes();
+        }
+
+        // Update iframes based on selected years and pass the password
         function updateIframes() {
             const year1 = year1Dropdown.value;
             const year2 = year2Dropdown.value;
-            document.getElementById('iframe1').src = `https://raw.githack.com/natanyanderson/HOApiecharts/main/HOA%20pie%20charts/expenses_pie_chart_${year1}.html`;
-            document.getElementById('iframe2').src = `https://raw.githack.com/natanyanderson/HOApiecharts/main/HOA%20pie%20charts/expenses_pie_chart_${year2}.html`;
+            document.getElementById('iframe1').src = `https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/expenses_pie_chart_${year1}.html?password=${encodeURIComponent(password)}`;
+            document.getElementById('iframe2').src = `https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/expenses_pie_chart_${year2}.html?password=${encodeURIComponent(password)}`;
         }
 
         // Add event listeners to dropdowns
-        year1Dropdown.addEventListener('change', updateIframes);
-        year2Dropdown.addEventListener('change', updateIframes);
-
-        // Initial iframe update
-        updateIframes();
+        year1Dropdown.addEventListener('change', () => {
+            if (password) {
+                updateIframes();
+            }
+        });
+        year2Dropdown.addEventListener('change', () => {
+            if (password) {
+                updateIframes();
+            }
+        });
     </script>
 </body>
 </html>
