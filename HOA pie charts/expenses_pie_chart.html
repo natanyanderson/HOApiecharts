@@ -34,14 +34,13 @@ function loadScript(url, callback) {
                 paths: {
                     echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
                     'encrypted-yearly-data': 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/encryptedyearlydata',
-                    'yearly-data': 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/yearlydata',
                     'crypto-js': 'scripts/crypto-js.min'
                 }
             });
 
             // Load ECharts and the data module
-            requirejs(['echarts', 'encrypted-yearly-data', 'yearly-data', 'crypto-js'], function(echarts, encrypteddata, yearlydata, CryptoJS) {
-                renderCharts(echarts, encrypteddata, yearlydata, CryptoJS);
+            requirejs(['echarts', 'encrypted-yearly-data', 'crypto-js'], function(echarts, encrypteddata, CryptoJS) {
+                renderCharts(echarts, encrypteddata, null, CryptoJS);
             });
         });
 
