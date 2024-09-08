@@ -88,12 +88,14 @@ function loadScript(url, callback) {
                 console.log(JSON.stringify(inyearlydata));
             }
 
-            const password = getQueryParams().password || 'HO@srockdontthey';
+            const password = getQueryParams().password;
             const year = getQueryParams().year || '2003';
+
+            console.log("password=", password, ", year=", year);
 
             const yearlydata = decryptContent(encrypteddata, password, CryptoJS);
 
-            console.log("password=", password, ", yearlydata=", yearlydata);
+            console.log("yearlydata=", yearlydata);
 
             var mychart = echarts.init(
                         document.getElementById('pieChart'), 'white', {renderer: 'canvas'});
