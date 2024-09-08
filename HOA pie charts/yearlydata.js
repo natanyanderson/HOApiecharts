@@ -722,7 +722,7 @@ define([], function() {
                 "HOA dues income": 449232,
                 "Other revenue": 978,
                 "Total revenue": 627000,
-                "Total expenses": 688220,
+                "Total Expenses": 688220,
                 "Income from operations": 61220,
                 "Net Profit (Loss)": 61220
             }
