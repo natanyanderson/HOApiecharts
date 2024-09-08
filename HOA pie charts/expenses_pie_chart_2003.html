@@ -33,14 +33,15 @@ function loadScript(url, callback) {
             requirejs.config({
                 paths: {
                     echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
-                    yearlydata: 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/yearlydata',
+                    'encrypted-yearly-data': 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/encryptedyearlydata',
+                    'yearly-data': 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/yearlydata',
                     'crypto-js': 'scripts/crypto-js.min'
                 }
             });
 
             // Load ECharts and the data module
-            requirejs(['echarts', 'yearlydata', 'crypto-js'], function(echarts, encrypteddata, CryptoJS) {
-                renderCharts(echarts, encrypteddata, CryptoJS);
+            requirejs(['echarts', 'encrypted-yearly-data', 'yearly-data', 'crypto-js'], function(echarts, encrypteddata, inYearlyData, CryptoJS) {
+                renderCharts(echarts, encrypteddata, inYearlyData, CryptoJS);
             });
         });
 
@@ -58,30 +59,48 @@ function loadScript(url, callback) {
 
         function decryptContent(encrypteddata, password, CryptoJS) {
             const decrypted = CryptoJS.AES.decrypt(encrypteddata, password);
-            console.log("decrypted=", decrypted);
             const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-            return decryptedText;
+            console.log(decryptedText)
+            const decryptedJSON = JSON.parse(decryptedText);
+            return decryptedJSON;
         }        
 
-        function renderCharts(echarts, encrypteddata, CryptoJS) {
+        function convertDataToEcharts(yearlydata, year) {
+            console.log("convertDataToEcharts year=", year, ", yearlydata=", yearlydata);
+            console.log("convertDataToEcharts 2003=", yearlydata[2003]);
+            const expensesData = Object.keys(yearlydata[2003].expenses).map(key => {
+                return { name: key, value: yearlydata[2003].expenses[key] };
+            });
+
+            return expensesData;
+        }        
+
+        function convertDataToLegend(yearlydata, year) {
+            return  Object.keys(yearlydata[year].expenses);
+        }        
+
+        function renderCharts(echarts, encrypteddata, inYearlyData, CryptoJS) {
             if (typeof echarts === 'undefined') {
                 console.error('ECharts library not loaded.');
                 return;
             }
 
+            console.log("inYearlyData");
+            console.log(JSON.stringify(inYearlyData));
+
             const password = getQueryParams().password || 'HO@srockdontthey';
 
             const yearlydata = decryptContent(encrypteddata, password, CryptoJS);
+
+            console.log("password=", password, ", yearlydata=", yearlydata);
 
             var mychart = echarts.init(
                         document.getElementById('pieChart'), 'white', {renderer: 'canvas'});
 
             // Convert expenses object into an array format for echarts
-            const expensesData = Object.keys(yearlydata['2003'].expenses).map(key => {
-                return { name: key, value: yearlydata['2003'].expenses[key] };
-            });
+            const expensesData = convertDataToEcharts(yearlydata, '2003');
 
-            const legendData = Object.keys(yearlydata['2003'].expenses);
+            const legendData = convertDataToLegend(yearlydata, '2003');
 
             function generateSubtext(income) {
                 return `Total Revenues: $${income["Total Revenues"].toLocaleString()}\n` +
