@@ -95,8 +95,8 @@
         function updateIframes() {
             const year1 = year1Dropdown.value;
             const year2 = year2Dropdown.value;
-            document.getElementById('iframe1').src = `https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/expenses_pie_chart_${year1}.html?password=${encodeURIComponent(password)}`;
-            document.getElementById('iframe2').src = `https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/expenses_pie_chart_${year2}.html?password=${encodeURIComponent(password)}`;
+            document.getElementById('iframe1').src = `https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year1}`;
+            document.getElementById('iframe2').src = `https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year2}`;
         }
 
         // Add event listeners to dropdowns
