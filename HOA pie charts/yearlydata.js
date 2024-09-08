@@ -25,10 +25,12 @@ define([], function() {
                 "Provision for State Income Taxes": 33
             },
             income: {
-                "Interest Income": 144,
-                "Other Income": 353,
-                "Common Charges (Note 1)": 253417,
-                "Total Revenue": 253914,
+                "Income": null,
+                "\tInterest Income": 144,
+                "\tOther Income": 353,
+                "\tCommon Charges (Note 1)": 253417,
+                "\tTotal Revenue": 253914,
+                "": null,
                 "Total Expenses": 281250,
                 "Net Profit (Loss)": 27336
             }
@@ -58,10 +60,12 @@ define([], function() {
                 "Provision for State Income Taxes": 89
             },
             income: {
-                "Interest Income": 55,
-                "Other Income": 300,
-                "Common Charges (Note 1)": 331735,
-                "Total Revenue": 332090,
+                "Income": null,
+                "\tInterest Income": 55,
+                "\tOther Income": 300,
+                "\tCommon Charges (Note 1)": 331735,
+                "\tTotal Revenue": 332090,
+                "": null,
                 "Total Expenses": 310999,
                 "Net Profit (Loss)": 21091
             }
@@ -92,11 +96,13 @@ define([], function() {
                 "Provision for State Income Taxes": 31
             },
             income: {
-                "Interest Income": 361,
-                "Other Income": 672,
-                "Assessments": 40800,
-                "Common Charges (Note 1)": 358160,
-                "Total Revenue": 399993,
+                "Income": null,
+                "\tInterest Income": 361,
+                "\tOther Income": 672,
+                "\tAssessments": 40800,
+                "\tCommon Charges (Note 1)": 358160,
+                "\tTotal Revenue": 399993,
+                "": null,
                 "Total Expenses": 337051,
                 "Net Profit (Loss)": 72942
             }
@@ -131,11 +137,13 @@ define([], function() {
                 "Provision for State Income Taxes": 129
             },
             income: {
-                "Interest Income": 1780,
-                "Other Income": 0,
-                "Settlement with Sponsor": 17770,
-                "Common Charges (Note 1)": 387355,
-                "Total Revenue": 406905,
+                "Income": null,
+                "\tInterest Income": 1780,
+                "\tOther Income": 0,
+                "\tSettlement with Sponsor": 17770,
+                "\tCommon Charges (Note 1)": 387355,
+                "\tTotal Revenue": 406905,
+                "": null,
                 "Total Expenses": 377029,
                 "Net Profit (Loss)": 29876
             }
@@ -170,11 +178,13 @@ define([], function() {
                 "Provision for State Income Taxes": 237
             },
             income: {
-                "Interest Income": 2865,
-                "Other Income": 328,
-                "Settlement with Sponsor": 0,
-                "Common Charges (Note 1)": 387355,
-                "Total Revenue": 390548,
+                "Income": null,
+                "\tInterest Income": 2865,
+                "\tOther Income": 328,
+                "\tSettlement with Sponsor": 0,
+                "\tCommon Charges (Note 1)": 387355,
+                "": null,
+                "\tTotal Revenue": 390548,
                 "Total Expenses": 407813,
                 "Net Profit (Loss)": 17265
             }
@@ -209,10 +219,12 @@ define([], function() {
                 "Provision for State Income Taxes": 3
             },
             income: {
-                "Interest Income": 1844,
-                "Other Income": 912,
-                "Common Charges (Note 1)": 387355,
-                "Total Revenue": 390111,
+                "Income": null,
+                "\tInterest Income": 1844,
+                "\tOther Income": 912,
+                "\tCommon Charges (Note 1)": 387355,
+                "\tTotal Revenue": 390111,
+                "": null,
                 "Total Expenses": 372654,
                 "Net Profit (Loss)": 17457
             }
@@ -245,10 +257,12 @@ define([], function() {
                 "Provision for State Income Taxes": 215
             },
             income: {
-                "Interest Income": 1806,
-                "Other Income": 961,
-                "Common Charges (Note 1)": 427584,
-                "Total Revenue": 430351,
+                "Income": null,
+                "\tInterest Income": 1806,
+                "\tOther Income": 961,
+                "\tCommon Charges (Note 1)": 427584,
+                "\tTotal Revenue": 430351,
+                "": null,
                 "Total Expenses": 365227,
                 "Net Profit (Loss)": 65124
             }
@@ -280,10 +294,12 @@ define([], function() {
                 "Provision for State Income Taxes": 290
             },
             income: {
-                "Interest Income": 1655,
-                "Other Income": 206,
-                "Common Charges (Note 1)": 427584,
-                "Total Revenue": 429445,
+                "Income": null,
+                "\tInterest Income": 1655,
+                "\tOther Income": 206,
+                "\tCommon Charges (Note 1)": 427584,
+                "\tTotal Revenue": 429445,
+                "": null,
                 "Total Expenses": 397583,
                 "Net Profit (Loss)": 31862
             }
@@ -316,10 +332,12 @@ define([], function() {
                 "Provision for State Income Taxes": 375
             },
             income: {
-                "Interest Income": 862,
-                "Other Income": 705,
-                "Common Charges (Note 1)": 443904,
-                "Total Revenue": 445471,
+                "Income": null,
+                "\tInterest Income": 862,
+                "\tOther Income": 705,
+                "\tCommon Charges (Note 1)": 443904,
+                "\tTotal Revenue": 445471,
+                "": null,
                 "Total Expenses": 477308,
                 "Net Profit (Loss)": 31837
             }
@@ -351,10 +369,12 @@ define([], function() {
                 "Provision for State Income Taxes": 375
             },
             income: {
-                "Interest Income": 565,
-                "Other Income": 5798,
-                "Common Charges (Note 1)": 460224,
-                "Total Revenue": 466587,
+                "Income": null,
+                "\tInterest Income": 565,
+                "\tOther Income": 5798,
+                "\tCommon Charges (Note 1)": 460224,
+                "\tTotal Revenue": 466587,
+                "": null,
                 "Total Expenses": 465710,
                 "Net Profit (Loss)": 877
             }
@@ -388,11 +408,13 @@ define([], function() {
                 "Provision for State Income Taxes": 347
             },
             income: {
-                "Interest Income": 323,
-                "Assessments": 169548,
-                "Other Income": 100,
-                "Common Charges (Note 1)": 460224,
-                "Total Revenue": 630195,
+                "Income": null,
+                "\tInterest Income": 323,
+                "\tAssessments": 169548,
+                "\tOther Income": 100,
+                "\tCommon Charges (Note 1)": 460224,
+                "\tTotal Revenue": 630195,
+                "": null,
                 "Total Expenses": 1067212,
                 "Net Profit (Loss)": 437017
             }
@@ -428,11 +450,13 @@ define([], function() {
                 "Provision for State Income Taxes": 585
             },
             income: {
-                "Interest Income": 543,
-                "Assessments": 56890,
-                "Other Income": 81,
-                "Common Charges (Note 1)": 460224,
-                "Total Revenue": 517738,
+                "Income": null,
+                "\tInterest Income": 543,
+                "\tAssessments": 56890,
+                "\tOther Income": 81,
+                "\tCommon Charges (Note 1)": 460224,
+                "\tTotal Revenue": 517738,
+                "": null,
                 "Total Expenses": 605914,
                 "Net Profit (Loss)": 88176
             }
@@ -468,12 +492,14 @@ define([], function() {
                 "Provision for State Income Taxes": 585
             },
             income: {
-                "Interest Income": 458,
-                "Assessments": 58900,
-                "Expense reimbursement": 32449,
-                "Other Income": 645,
-                "Common Charges (Note 1)": 476554,
-                "Total Revenue": 568996,
+                "Income": null,
+                "\tInterest Income": 458,
+                "\tAssessments": 58900,
+                "\tExpense reimbursement": 32449,
+                "\tOther Income": 645,
+                "\tCommon Charges (Note 1)": 476554,
+                "\tTotal Revenue": 568996,
+                "": null,
                 "Total Expenses": 454917,
                 "Net Profit (Loss)": 114079
             }
@@ -508,12 +534,14 @@ define([], function() {
                 "Provision for State Income Taxes": 628
             },
             income: {
-                "Interest Income": 476,
-                "Assessments": 57400,
-                "Expense reimbursement": 0,
-                "Other Income": 104,
-                "Common Charges (Note 1)": 491504,
-                "Total Revenue": 549484,
+                "Income": null,
+                "\tInterest Income": 476,
+                "\tAssessments": 57400,
+                "\tExpense reimbursement": 0,
+                "\tOther Income": 104,
+                "\tCommon Charges (Note 1)": 491504,
+                "\tTotal Revenue": 549484,
+                "": null,
                 "Total Expenses": 457409,
                 "Net Profit (Loss)": 92075
             }
@@ -546,11 +574,13 @@ define([], function() {
                 "Provision for State Income Taxes": 640
             },
             income: {
-                "Interest Income": 462,
-                "Assessments": 65725,
-                "Other Income": 332,
-                "Common Charges (Note 1)": 509184,
-                "Total Revenue": 575703,
+                "Income": null,
+                "\tInterest Income": 462,
+                "\tAssessments": 65725,
+                "\tOther Income": 332,
+                "\tCommon Charges (Note 1)": 509184,
+                "\tTotal Revenue": 575703,
+                "": null,
                 "Total Expenses": 464194,
                 "Net Profit (Loss)": 111509
             }
@@ -577,16 +607,19 @@ define([], function() {
                 "Corporate Taxes": 642
             },
             income: {
-                "Assessments": 81081,
-                "HOA dues": 509184,
-                "Interest income": 1879,
-                "Other revenue": 346,
-                "Total Revenue": 592490,
+                "Revenue": null,
+                "\tAssessments": 81081,
+                "\tHOA dues": 509184,
+                "\tInterest Income": 1879,
+                "\tOther revenue": 346,
+                "\tTotal Revenue": 592490,
+                "": null,
                 "Total Expenses": 510163,
-                "Income from operations": 82327,
-                "Interest expense on loan": 20317,
-                "Major repairs - Drainage": 25448,
-                "Major repairs - Water Meter Pit": 13300,
+                "Income from operations": null,
+                "\tInterest expense on loan": 20317,
+                "\tMajor repairs - Drainage": 25448,
+                "\tMajor repairs - Water Meter Pit": 13300,
+                "": null,
                 "Net Profit (Loss)": 23262
             }
         },
@@ -612,18 +645,21 @@ define([], function() {
                 "Corporate Taxes": 643
             },
             income: {
-                "Assessments": 82528,
-                "HOA dues": 541824,
-                "Interest income": 3428,
-                "Other revenue": 0,
-                "Total Revenue": 627780,
+                "Revenue": null,
+                "\tAssessments": 82528,
+                "\tHOA dues": 541824,
+                "\tInterest Income": 3428,
+                "\tOther revenue": 0,
+                "\tTotal Revenue": 627780,
+                "": null,
                 "Total Expenses": 473219,
-                "Income from operations": 154561,
-                "Interest expense on loan": 17189,
-                "Major repairs - Drainage": 0,
-                "Major repairs - Lighting Project": 8776,
-                "Major repairs - Water Meter Pit": 0,
-                "Major repairs - Pool furniture": 17018,
+                "Income from operations": null,
+                "\tInterest expense on loan": 17189,
+                "\tMajor repairs - Drainage": 0,
+                "\tMajor repairs - Lighting Project": 8776,
+                "\tMajor repairs - Water Meter Pit": 0,
+                "\tMajor repairs - Pool furniture": 17018,
+                "": null,
                 "Net Profit (Loss)": 111578
             }
         },
@@ -649,16 +685,20 @@ define([], function() {
                 "Corporate Taxes": 645
             },
             income: {
-                "Assessments": 82528,
-                "HOA dues": 574464,
-                "Interest income": 1874,
-                "Other revenue": 3704,
-                "Total Revenue": 662570,
+                "Revenue": null,
+                "\tAssessments": 82528,
+                "\tHOA dues": 574464,
+                "\tInterest Income": 1874,
+                "\tOther revenue": 3704,
+                "\tTotal Revenue": 662570,
+                "": null,
                 "Total Expenses": 482068,
-                "Income from operations": 180502,
-                "Interest expense on loan": 13933,
-                "Major repairs - Lighting Project": 1840,
-                "Major repairs - Pool furniture": 0,
+                "": null,
+                "Income from operations": null,
+                "\tInterest expense on loan": 13933,
+                "\tMajor repairs - Lighting Project": 1840,
+                "\tMajor repairs - Pool furniture": 0,
+                "": null,
                 "Net Profit (Loss)": 164729
             }
         },
@@ -684,15 +724,19 @@ define([], function() {
                 "Corporate Taxes": 647
             },
             income: {
-                "Assessments": 82528,
-                "HOA dues": 598944,
-                "Interest income": 558,
-                "Other revenue": 0,
-                "Total Revenue": 682030,
+                "Revenue": null,
+                "\tAssessments": 82528,
+                "\tHOA dues": 598944,
+                "\tInterest Income": 558,
+                "\tOther revenue": 0,
+                "\tTotal Revenue": 682030,
+                "": null,
                 "Total Expenses": 528881,
-                "Income from operations": 153149,
-                "Interest expense on loan": 10415,
-                "Major repairs - Lighting Project": 0,
+                "": null,
+                "Income from operations": null,
+                "\tInterest expense on loan": 10415,
+                "\tMajor repairs - Lighting Project": 0,
+                "": null,
                 "Net Profit (Loss)": 142734
             }
         },
@@ -713,14 +757,16 @@ define([], function() {
                 "Corporate Taxes": 650
             },
             income: {
-                "Common Charges": 112990,
-                "Assessments": 41240,
-                "Assessments - Road Fund": 17640,
-                "Late Fees": 1700,
-                "Chargeback Income": 195,
-                "Interest Income": 3025,
-                "HOA dues income": 449232,
-                "Other revenue": 978,
+                "Revenue": null,
+                "\tCommon Charges": 112990,
+                "\tAssessments": 41240,
+                "\tAssessments - Road Fund": 17640,
+                "\tLate Fees": 1700,
+                "\tChargeback Income": 195,
+                "\tInterest Income": 3025,
+                "\tHOA dues income": 449232,
+                "\tOther revenue": 978,
+                "": null,
                 "Total Revenue": 627000,
                 "Total Expenses": 688220,
                 "Income from operations": 61220,
