@@ -28,7 +28,7 @@ define([], function() {
                 "Interest Income": 144,
                 "Other Income": 353,
                 "Common Charges (Note 1)": 253417,
-                "Total Revenues": 253914,
+                "Total revenue": 253914,
                 "Total Expenses": 281250,
                 "Net Profit (Loss)": 27336
             }
@@ -61,7 +61,7 @@ define([], function() {
                 "Interest Income": 55,
                 "Other Income": 300,
                 "Common Charges (Note 1)": 331735,
-                "Total Revenues": 332090,
+                "Total revenue": 332090,
                 "Total Expenses": 310999,
                 "Net Profit (Loss)": 21091
             }
@@ -96,7 +96,7 @@ define([], function() {
                 "Other Income": 672,
                 "Assessments": 40800,
                 "Common Charges (Note 1)": 358160,
-                "Total Revenues": 399993,
+                "Total revenue": 399993,
                 "Total Expenses": 337051,
                 "Net Profit (Loss)": 72942
             }
@@ -135,7 +135,7 @@ define([], function() {
                 "Other Income": 0,
                 "Settlement with Sponsor": 17770,
                 "Common Charges (Note 1)": 387355,
-                "Total Revenues": 406905,
+                "Total revenue": 406905,
                 "Total Expenses": 377029,
                 "Net Profit (Loss)": 29876
             }
@@ -174,7 +174,7 @@ define([], function() {
                 "Other Income": 328,
                 "Settlement with Sponsor": 0,
                 "Common Charges (Note 1)": 387355,
-                "Total Revenues": 390548,
+                "Total revenue": 390548,
                 "Total Expenses": 407813,
                 "Net Profit (Loss)": 17265
             }
@@ -212,7 +212,7 @@ define([], function() {
                 "Interest Income": 1844,
                 "Other Income": 912,
                 "Common Charges (Note 1)": 387355,
-                "Total Revenues": 390111,
+                "Total revenue": 390111,
                 "Total Expenses": 372654,
                 "Net Profit (Loss)": 17457
             }
@@ -248,7 +248,7 @@ define([], function() {
                 "Interest Income": 1806,
                 "Other Income": 961,
                 "Common Charges (Note 1)": 427584,
-                "Total Revenues": 430351,
+                "Total revenue": 430351,
                 "Total Expenses": 365227,
                 "Net Profit (Loss)": 65124
             }
@@ -283,7 +283,7 @@ define([], function() {
                 "Interest Income": 1655,
                 "Other Income": 206,
                 "Common Charges (Note 1)": 427584,
-                "Total Revenues": 429445,
+                "Total revenue": 429445,
                 "Total Expenses": 397583,
                 "Net Profit (Loss)": 31862
             }
@@ -319,7 +319,7 @@ define([], function() {
                 "Interest Income": 862,
                 "Other Income": 705,
                 "Common Charges (Note 1)": 443904,
-                "Total Revenues": 445471,
+                "Total revenue": 445471,
                 "Total Expenses": 477308,
                 "Net Profit (Loss)": 31837
             }
@@ -354,7 +354,7 @@ define([], function() {
                 "Interest Income": 565,
                 "Other Income": 5798,
                 "Common Charges (Note 1)": 460224,
-                "Total Revenues": 466587,
+                "Total revenue": 466587,
                 "Total Expenses": 465710,
                 "Net Profit (Loss)": 877
             }
@@ -392,7 +392,7 @@ define([], function() {
                 "Assessments": 169548,
                 "Other Income": 100,
                 "Common Charges (Note 1)": 460224,
-                "Total Revenues": 630195,
+                "Total revenue": 630195,
                 "Total Expenses": 1067212,
                 "Net Profit (Loss)": 437017
             }
@@ -432,7 +432,7 @@ define([], function() {
                 "Assessments": 56890,
                 "Other Income": 81,
                 "Common Charges (Note 1)": 460224,
-                "Total Revenues": 517738,
+                "Total revenue": 517738,
                 "Total Expenses": 605914,
                 "Net Profit (Loss)": 88176
             }
@@ -473,7 +473,7 @@ define([], function() {
                 "Expense reimbursement": 32449,
                 "Other Income": 645,
                 "Common Charges (Note 1)": 476554,
-                "Total Revenues": 568996,
+                "Total revenue": 568996,
                 "Total Expenses": 454917,
                 "Net Profit (Loss)": 114079
             }
@@ -513,7 +513,7 @@ define([], function() {
                 "Expense reimbursement": 0,
                 "Other Income": 104,
                 "Common Charges (Note 1)": 491504,
-                "Total Revenues": 549484,
+                "Total revenue": 549484,
                 "Total Expenses": 457409,
                 "Net Profit (Loss)": 92075
             }
@@ -550,7 +550,7 @@ define([], function() {
                 "Assessments": 65725,
                 "Other Income": 332,
                 "Common Charges (Note 1)": 509184,
-                "Total Revenues": 575703,
+                "Total revenue": 575703,
                 "Total Expenses": 464194,
                 "Net Profit (Loss)": 111509
             }
@@ -581,7 +581,7 @@ define([], function() {
                 "HOA dues": 509184,
                 "Interest income": 1879,
                 "Other revenue": 346,
-                "Total Revenue": 592490,
+                "Total revenue": 592490,
                 "Total Expenses": 510163,
                 "Income from operations": 82327,
                 "Interest expense on loan": 20317,
@@ -616,7 +616,7 @@ define([], function() {
                 "HOA dues": 541824,
                 "Interest income": 3428,
                 "Other revenue": 0,
-                "Total Revenue": 627780,
+                "Total revenue": 627780,
                 "Total Expenses": 473219,
                 "Income from operations": 154561,
                 "Interest expense on loan": 17189,
@@ -653,7 +653,7 @@ define([], function() {
                 "HOA dues": 574464,
                 "Interest income": 1874,
                 "Other revenue": 3704,
-                "Total Revenue": 662570,
+                "Total revenue": 662570,
                 "Total Expenses": 482068,
                 "Income from operations": 180502,
                 "Interest expense on loan": 13933,
@@ -688,7 +688,7 @@ define([], function() {
                 "HOA dues": 598944,
                 "Interest income": 558,
                 "Other revenue": 0,
-                "Total Revenue": 682030,
+                "Total revenue": 682030,
                 "Total Expenses": 528881,
                 "Income from operations": 153149,
                 "Interest expense on loan": 10415,
