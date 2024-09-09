@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>HOA Voting Data</title>
-    <!-- Import ECharts asynchronously -->
     <script type="text/javascript">
         function loadScript(url, callback) {
             var script = document.createElement("script");
             script.type = "text/javascript";
-
+            
             if (script.readyState) {  // IE
                 script.onreadystatechange = function () {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -21,24 +20,29 @@
                     callback();
                 };
             }
-
+            
             script.src = url;
             document.getElementsByTagName("head")[0].appendChild(script);
         }
 
-        loadScript("https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js", function () {
-            console.log('ECharts library loaded.');
-            renderCharts();
+        // Load RequireJS asynchronously
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js", function () {
+            console.log('RequireJS loaded.');
+
+            requirejs.config({
+                paths: {
+                    echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
+                    datadilution: 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/datadilution' // Update with the correct path to your data.js file
+                }
+            });
+
+            // Load ECharts and the data module
+            requirejs(['echarts', 'datadilution'], function(echarts, datadilution) {
+                renderCharts(echarts, datadilution);
+            });
         });
-    </script>
-</head>
-<body>
-    <div id="boardDistribution" style="width: 600px; height: 400px;"></div>
-    <div id="sizeDistribution" style="width: 600px; height: 400px;"></div>
-    <div id="fiancialDistribution" style="width: 600px; height: 400px;"></div>
-    <div id="dilutedRepresentation" style="width: 600px; height: 400px;"></div>
-    <script type="text/javascript">
-        function renderCharts() {
+
+        function renderCharts(echarts, data) {
             if (typeof echarts === 'undefined') {
                 console.error('ECharts library not loaded.');
                 return;
@@ -66,13 +70,7 @@
                         name: 'Board Members',
                         type: 'pie',
                         radius: '50%',
-                        data: [
-                            {value: 1, name: 'Condo 1 (1)'},
-                            {value: 1, name: 'Condo 2 (1)'},
-                            {value: 1, name: 'Condo 3 (1)'},
-                            {value: 3, name: 'Condo 4 (3)'},
-                            {value: 1, name: 'At Large (1)'}
-                        ],
+                        data: data.boardDistributionData,
                         emphasis: {
                             itemStyle: {
                                 shadowBlur: 10,
@@ -101,12 +99,7 @@
                         name: 'Votes',
                         type: 'pie',
                         radius: '50%',
-                        data: [
-                            {value: 18, name: 'Condo 1 (18)'},
-                            {value: 11, name: 'Condo 2 (11)'},
-                            {value: 9, name: 'Condo 3 (9)'},
-                            {value: 98, name: 'Condo 4 (98)'}
-                        ],
+                        data: data.sizeDistributionData,
                         emphasis: {
                             itemStyle: {
                                 shadowBlur: 10,
@@ -135,12 +128,7 @@
                         name: 'Votes',
                         type: 'pie',
                         radius: '50%',
-                        data: [
-                            {value: 117437.04, name: 'Condo 1 $117,437.04'},
-                            {value: 71767.08, name: 'Condo 2 $71,767.08'},
-                            {value: 58718.52, name: 'Condo 3 $58,718.52'},
-                            {value: 639379.44, name: 'Condo 4 $639,379.44'}
-                        ],
+                        data: data.financialDistributionData,
                         emphasis: {
                             itemStyle: {
                                 shadowBlur: 10,
@@ -169,13 +157,7 @@
                         name: 'Voting Power',
                         type: 'pie',
                         radius: '50%',
-                        data: [
-                            {value: 1/18, name: 'Condo 1 (1/18)'},
-                            {value: 1/11, name: 'Condo 2 (1/11)'},
-                            {value: 1/9, name: 'Condo 3 (1/9)'},
-                            {value: 3/98, name: 'Condo 4 (3/98)'},
-                            {value: 1/136, name: 'At Large (1/136)'},
-                        ],
+                        data: data.dilutedRepresentationData,
                         emphasis: {
                             itemStyle: {
                                 shadowBlur: 10,
@@ -193,5 +175,11 @@
             fiancialDistributionChart.setOption(fiancialDistributionOption);
         }
     </script>
+</head>
+<body>
+    <div id="boardDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="sizeDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="fiancialDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="dilutedRepresentation" style="width: 600px; height: 400px;"></div>
 </body>
 </html>
