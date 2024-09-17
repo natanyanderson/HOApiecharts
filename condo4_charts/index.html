@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Condo 4 Expenses Pie Charts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .iframe-container {
+            width: 49%;
+        }
+        .iframe-container-line {
+            width: 90%;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        .password-prompt {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare HOA Expenses Pie Charts for Selected Years</h1>
+
+    <div class="password-prompt">
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password" placeholder="Enter password" />
+        <button onclick="submitPassword()">Submit</button>
+    </div>
+
+    <div>
+        <label for="year1">Year 1:</label>
+        <select id="year1">
+            <!-- Options will be added by JavaScript -->
+        </select>
+        <label for="year2">Year 2:</label>
+        <select id="year2">
+            <!-- Options will be added by JavaScript -->
+        </select>
+    </div>
+    <div class="container">
+        <div class="iframe-container">
+            <iframe id="iframe1" src=""></iframe>
+        </div>
+        <div class="iframe-container">
+            <iframe id="iframe2" src=""></iframe>
+        </div>
+    </div>
+    <div class="iframe-container-line">
+        <iframe id="iframe3" src=""></iframe>
+    </div>
+
+    <script>
+        let password = '';
+
+        // Define the range of years for the files
+        const years = Array.from({length: 17}, (_, i) => 2006 + i);
+
+        // Get dropdown elements
+        const year1Dropdown = document.getElementById('year1');
+        const year2Dropdown = document.getElementById('year2');
+
+        // Populate dropdowns with year options
+        years.forEach(year => {
+            const option1 = document.createElement('option');
+            option1.value = year;
+            option1.textContent = year;
+            year1Dropdown.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = year;
+            option2.textContent = year;
+            year2Dropdown.appendChild(option2);
+        });
+
+        // Set initial values
+        year1Dropdown.value = 2006;
+        year2Dropdown.value = 2022;
+
+        // Prompt for password and update iframes when password is entered
+        function submitPassword() {
+            password = document.getElementById('password').value | 'Condo4R*ks';
+            if (!password) {
+                alert('Please enter a password!');
+                return;
+            }
+            updateIframes();
+        }
+
+        // Update iframes based on selected years and pass the password
+        function updateIframes() {
+            const year1 = year1Dropdown.value;
+            const year2 = year2Dropdown.value;
+            document.getElementById('iframe1').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year1}`;
+            document.getElementById('iframe2').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year2}`;
+            document.getElementById('iframe3').src = `./linechart.html?password=${encodeURIComponent(password)}`;
+        }
+
+        // Add event listeners to dropdowns
+        year1Dropdown.addEventListener('change', () => {
+            if (password) {
+                updateIframes();
+            }
+        });
+        year2Dropdown.addEventListener('change', () => {
+            if (password) {
+                updateIframes();
+            }
+        });
+    </script>
+</body>
+</html>
