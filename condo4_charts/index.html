@@ -117,6 +117,36 @@
                 updateIframes();
             }
         });
+
+
+        // Listen for messages in the iframe (for testing purposes)
+        window.addEventListener('message', function(event) {
+            console.log('index: Message received in expenses_pie_chart iframe:', event.data);
+
+            let selectedYear = parseInt(event.data.year);
+
+            console.log('index: selectedYear=', selectedYear);
+
+            // Forward the message to the target iframe (pie charts)
+            const pieChartIframe1 = document.getElementById('iframe1');
+            const existingSrcUrl1 = new URL(pieChartIframe1.src);  // Parse the existing iframe URL
+            existingSrcUrl1.searchParams.set('year', selectedYear);  // Update the 'year' parameter
+            // Optionally ensure other parameters like 'password' remain unchanged
+            // existingSrcUrl.searchParams.set('password', existingSrcUrl.searchParams.get('password'));
+            pieChartIframe1.src = existingSrcUrl1.toString();
+            const year1Dropdown = document.getElementById('year1');
+            year1Dropdown.value = selectedYear;
+
+            const pieChartIframe2 = document.getElementById('iframe2');
+            const existingSrcUrl2 = new URL(pieChartIframe2.src);  // Parse the existing iframe URL
+            existingSrcUrl2.searchParams.set('year', selectedYear+1);  // Update the 'year' parameter
+            // Optionally ensure other parameters like 'password' remain unchanged
+            // existingSrcUrl.searchParams.set('password', existingSrcUrl.searchParams.get('password'));
+            pieChartIframe2.src = existingSrcUrl2.toString();
+            const year2Dropdown = document.getElementById('year2');
+            year2Dropdown.value = selectedYear+1;
+        });        
+
     </script>
 </body>
 </html>

@@ -1,113 +1,329 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOA timeseries</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
+    <title>Awesome-pyecharts</title>
+    <script type="text/javascript">
+
+        function loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            
+            if (script.readyState) {  // IE
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  // Others
+                script.onload = function () {
+                    callback();
+                };
+            }
+            
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
         }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .iframe-container {
-            width: 90%;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
-        .password-prompt {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Compare HOA Expenses Pie Charts for Selected Years</h1>
 
-    <div class="password-prompt">
-        <label for="password">Enter Password:</label>
-        <input type="password" id="password" placeholder="Enter password" />
-        <button onclick="submitPassword()">Submit</button>
-    </div>
+        // Load RequireJS asynchronously
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js", function () {
+            console.log('RequireJS loaded.');
 
-    <div>
-        <label for="year1">Year 1:</label>
-        <select id="year1">
-            <!-- Options will be added by JavaScript -->
-        </select>
-        <label for="year2">Year 2:</label>
-        <select id="year2">
-            <!-- Options will be added by JavaScript -->
-        </select>
-    </div>
-    <div class="container">
-        <div class="iframe-container">
-            <iframe id="iframe3" src=""></iframe>
-        </div>
-    </div>
+            requirejs.config({
+                paths: {
+                    echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
+                    'encrypted-yearly-data': 'encrypted_condo_4_data',
+                    'yearly-data': 'condo_4_data',
+                    'crypto-js': 'scripts/crypto-js.min'
+                }
+            });
 
-    <script>
-        let password = '';
-
-        // Define the range of years for the files
-        const years = Array.from({length: 17}, (_, i) => 2006 + i);
-
-        // Get dropdown elements
-        const year1Dropdown = document.getElementById('year1');
-        const year2Dropdown = document.getElementById('year2');
-
-        // Populate dropdowns with year options
-        years.forEach(year => {
-            const option1 = document.createElement('option');
-            option1.value = year;
-            option1.textContent = year;
-            year1Dropdown.appendChild(option1);
-
-            const option2 = document.createElement('option');
-            option2.value = year;
-            option2.textContent = year;
-            year2Dropdown.appendChild(option2);
+            // Load ECharts and the data module
+            requirejs(['echarts', 'encrypted-yearly-data', 'yearly-data', 'crypto-js'], function(echarts, encrypteddata, inyearlydata, CryptoJS) {
+                renderCharts(echarts, encrypteddata, inyearlydata, CryptoJS);
+            });
         });
 
-        // Set initial values
-        year1Dropdown.value = 2006;
-        year2Dropdown.value = 2022;
+        function getQueryParams() {
+            const params = {};
+            window.location.search
+                .substr(1)
+                .split("&")
+                .forEach(function (item) {
+                    const [key, value] = item.split("=");
+                    params[key] = decodeURIComponent(value);
+                });
+            return params;
+        }
 
-        // Prompt for password and update iframes when password is entered
-        function submitPassword() {
-            password = document.getElementById('password').value | 'Condo4R*ks';
-            if (!password) {
-                alert('Please enter a password!');
+        function decryptContent(encrypteddata, password, CryptoJS) {
+            const decrypted = CryptoJS.AES.decrypt(encrypteddata, password);
+            const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+            console.log(decryptedText)
+            const decryptedJSON = JSON.parse(decryptedText);
+            return decryptedJSON;
+        }        
+
+        function convertDataToEcharts(yearlydata, year) {
+            const years = Object.keys(yearlydata);  // ["2020", "2021", "2022"]
+            const totalAssets = years.map(year => yearlydata[year].assets["Total Assets"]);
+
+            return expensesData;
+        }        
+
+        function convertDataToLegend(yearlydata, year) {
+            return  Object.keys(yearlydata[year].expenses);
+        }        
+
+        function generateSubtext(income) {
+
+            const subData = Object.keys(income).map(key => {
+                if (income[key]) {
+                    return key.toLocaleString() + ": " + income[key].toLocaleString();
+                } else {
+                    return key.toLocaleString();
+                }
+            });
+
+            console.log("generateSubtext: subData=", subData);
+
+            const result = subData.join('\n');
+
+            return result;
+        }
+
+        function getTitleWithColoredText(yearlydata, year) {
+            let titleText = '';
+            const income = yearlydata[year].income;
+
+            let result = "Expenses Distribution for " + year + "\n\n";
+
+            // Loop through the keys to generate the title text with proper formatting
+            const subData = Object.keys(income).map(key => {
+                const value = income[key];
+                console.log("getTitleWithColoredText: key=", key)
+                if (key.startsWith('Net Profit')) {
+                    const colorTag = value >= 0 ? 'positive' : 'negative';
+
+                    if ( value <= 0 ) {
+                        return '{negative|Net Profit(Loss): ' + value + '}';  // Green for positive
+                    } else {
+                        return '{positive|Net Profit: ' + value + '}';  // Green for positive
+                    }
+                } else {
+                    if (value) {
+                        return '{default|' + key + ': ' + value + '}';  // Black for default
+                    } else {
+                        return '{default|' + key + '}';
+                    }
+                }
+            });
+
+            console.log("getTitleWithColoredText: subData=", subData)
+
+            result += subData.join('\n');
+            return result;
+        }
+
+        // Function to iterate over the data structure and populate the selection box
+        function populateSeriesSelectionBox(data) {
+            const selectBox = document.getElementById('seriesSelect');
+            const seriesSet = new Set();  // Use a Set to avoid duplicates
+
+            // Iterate over each year and collect all series names from expenses, income, and assets
+            for (const year in data) {
+                const yearData = data[year];
+
+                // Extract keys from expenses, income, and assets and add to the set
+                Object.keys(yearData.expenses || {}).forEach(key => seriesSet.add(key));
+                Object.keys(yearData.income || {}).forEach(key => seriesSet.add(key));
+                Object.keys(yearData.assets || {}).forEach(key => seriesSet.add(key));
+            }
+
+            const sortedSeriesArray = Array.from(seriesSet).sort();
+
+            // Populate the selection box with the sorted series names
+            sortedSeriesArray.forEach(series => {
+                const option = document.createElement('option');
+                option.value = series;
+                option.textContent = series;
+                selectBox.appendChild(option);
+            });
+        }
+
+        // Function to update the chart when a series is selected
+        function updateChart(seriesName, yearlydata, mychart) {
+            const years = Object.keys(yearlydata);  // Get the years in the dataset
+            const seriesData = years.map(year => {
+                // Return the series value from expenses, income, or assets
+                return yearlydata[year].expenses[seriesName] || 
+                       yearlydata[year].income[seriesName] || 
+                       yearlydata[year].assets[seriesName] || null;  // Default to 0 if not found
+            });
+
+            const minY = Math.min(...seriesData);
+            const maxY = Math.max(...seriesData);
+
+            // Setting up the ECharts option for the selected series
+            const option = {
+                title: {
+                    text: `Series: ${seriesName}`
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: years  // X-axis as the years
+                },
+                yAxis: {
+                    type: 'value',
+                    min: minY,  // Set min based on the data
+                    max: maxY   // Set max based on the data
+                },
+                series: [
+                    {
+                        name: seriesName,
+                        type: 'line',
+                        data: seriesData,  // Data for the selected series
+                        itemStyle: {
+                            color: 'blue'
+                        }
+                    }
+                ]
+            };
+
+            // Update the chart with the new option
+            mychart.setOption(option);
+        }
+
+
+        function renderCharts(echarts, encrypteddata, inyearlydata, CryptoJS) {
+            if (typeof echarts === 'undefined') {
+                console.error('ECharts library not loaded.');
                 return;
             }
-            updateIframes();
+
+            if ( inyearlydata ) {
+                console.log("linechart: inyearlydata");
+                console.log(JSON.stringify(inyearlydata));
+            }
+
+            var mychart = echarts.init(
+                        document.getElementById('lineChart'), 'white', {renderer: 'canvas'});
+
+            const yearlydata = inyearlydata || decryptContent(encrypteddata, password, CryptoJS);
+
+            // Extracting the years and Total Assets for the line chart
+            const years = Object.keys(yearlydata);  // ["2020", "2021", "2022"]
+            const totalAssets = years.map(year => yearlydata[year].assets["Total Assets"]);
+
+            // Dynamically extract the last known year from the data
+            const lastKnownYear = years[years.length - 1];  // This will get "2022" from the data
+            const lastKnownAssets = totalAssets[totalAssets.length - 1];  // 2022 Total Assets
+            const projectionYears = ['2023', '2024', '2025', '2026', '2027'];
+            const numberOfProjectionYears = projectionYears.length;
+
+            // Calculate the annual growth needed to reach the liability goal by 2027
+            const liabilityGoal = 1500000;
+            const annualGrowthNeeded = (liabilityGoal - lastKnownAssets) / numberOfProjectionYears;
+
+            // Populate the projected Total Assets for 2023 - 2027
+            const projectedAssets = [];
+            let currentAssets = lastKnownAssets;
+
+            for (let i = 0; i < numberOfProjectionYears; i++) {
+                currentAssets += annualGrowthNeeded;
+                projectedAssets.push(currentAssets);
+            }
+
+            // Combine the years for the X-axis
+            const allYears = [...years, ...projectionYears];  // ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027"]
+
+            // For the projection series, pad the actual years with `null` so the line starts from 2023
+            const paddedProjectedAssets = totalAssets.map(() => null).concat(projectedAssets);  // Null for actual years, values for future
+
+            // Setting up the ECharts option for the line chart
+            const option = {
+                title: {
+                    text: 'Total Assets Over Time with Projection'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: allYears
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Total Assets',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                series: [
+                    {
+                        name: 'Total Assets (Actual)',
+                        type: 'line',
+                        data: totalAssets,
+                        itemStyle: {
+                            color: 'blue'
+                        }
+                    },
+                    {
+                        name: 'Total Assets (Projection)',
+                        type: 'line',
+                        data: paddedProjectedAssets,  // Nulls until projections start
+                        itemStyle: {
+                            color: 'red',
+                            lineStyle: {
+                                type: 'dashed'  // Dashed line for projection
+                            }
+                        }
+                    }
+                ]
+            };
+
+            mychart.setOption(option);
+
+            populateSeriesSelectionBox(yearlydata);
+
+            // Event listener for when a user selects a series from the dropdown
+            document.getElementById('seriesSelect').addEventListener('change', function() {
+                const selectedSeries = this.value;  // Get the selected series
+                console.log("linechart:seriesSelect: selectedSeries=", selectedSeries);
+                updateChart(selectedSeries, yearlydata, mychart);  // Update the chart with the selected series
+            });        
+
+            // Event listener for clicking on the 'Total Assets (Actual)' line
+            mychart.on('click', function (params) {
+                console.log("mychart.on: params", params);
+                if (params.seriesName === 'Total Assets (Actual)') {
+                    const selectedYear = params.name;  // The year clicked
+                    console.log('Year selected:', selectedYear);
+
+                    // Sending the year to the iframe
+                    //const iframe = document.parent.getElementById('iframe3');
+                    //iframe.contentWindow.postMessage({ year: selectedYear }, '*');  // Send the selected year
+                    window.parent.postMessage({ year: selectedYear }, '*'); 
+                }
+            });        
         }
 
-        // Update iframes based on selected years and pass the password
-        function updateIframes() {
-            const year1 = year1Dropdown.value;
-            const year2 = year2Dropdown.value;
-            document.getElementById('iframe1').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year1}`;
-            document.getElementById('iframe2').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year2}`;
-            document.getElementById('iframe3').src = `./linechart.html?password=${encodeURIComponent(password)}`;
-        }
-
-        // Add event listeners to dropdowns
-        year1Dropdown.addEventListener('change', () => {
-            if (password) {
-                updateIframes();
-            }
-        });
-        year2Dropdown.addEventListener('change', () => {
-            if (password) {
-                updateIframes();
-            }
+        // Listen for messages in the iframe (for testing purposes)
+        window.addEventListener('message', function(event) {
+            console.log('expenses_pie_chart: Message received in expenses_pie_chart iframe:', event.data);
         });
     </script>
+
+</head>
+<body >
+    <label for="seriesSelect">Select Series:</label>
+    <select id="seriesSelect">
+        <option value="" disabled selected>Select a series</option>
+    </select>
+    <div id="lineChart" class="chart-container" style="width:90%; height:500px;"></div>
 </body>
 </html>

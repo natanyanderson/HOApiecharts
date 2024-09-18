@@ -283,7 +283,7 @@ function loadScript(url, callback) {
                 },
                 "title": [
                     {
-                        "show": false,
+                        "show": true,
                         "text": subTextData,
                         "target": "blank",
                         "padding": 5,
@@ -326,11 +326,16 @@ function loadScript(url, callback) {
             mychart.on('mouseout', function () {
                 mychart.setOption({
                     title: {
-                        show: false  // Hide the title when mouse leaves the chart
+                        show: true  // Hide the title when mouse leaves the chart
                     }
                 });
             });
         }
+
+        // Listen for messages in the iframe (for testing purposes)
+        window.addEventListener('message', function(event) {
+            console.log('expenses_pie_chart: Message received in expenses_pie_chart iframe:', event.data);
+        });        
 
     </script>
 
