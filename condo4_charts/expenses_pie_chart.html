@@ -27,12 +27,12 @@ function loadScript(url, callback) {
         }
 
         // Load RequireJS asynchronously
-        loadScript("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js", function () {
+        loadScript("scripts/require.min.js", function () {
             console.log('RequireJS loaded.');
 
             requirejs.config({
                 paths: {
-                    echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
+                    echarts: 'scripts/echarts.min',
                     'encrypted-yearly-data': 'encrypted_condo_4_data',
                     'yearly-data': 'condo_4_data',
                     'crypto-js': 'scripts/crypto-js.min'
@@ -77,11 +77,19 @@ function loadScript(url, callback) {
             return  Object.keys(yearlydata[year].expenses);
         }        
 
+        function formatKey(inKey) {
+            if (inKey.startsWith("\t")) {
+                return "\t•" + inKey;
+            }
+                return inKey;
+        }        
+
+
         function generateSubtext(income) {
 
             const subData = Object.keys(income).map(key => {
                 if (income[key]) {
-                    return key.toLocaleString() + ": " + income[key].toLocaleString();
+                    return key.toLocaleString() + ": " + formatCurrency(income[key]);
                 } else {
                     return key.toLocaleString();
                 }
@@ -108,13 +116,13 @@ function loadScript(url, callback) {
                     const colorTag = value >= 0 ? 'positive' : 'negative';
 
                     if ( value <= 0 ) {
-                        return '{negative|Net Profit(Loss): ' + value + '}';  // Green for positive
+                        return '{negative|Net Profit(Loss): ' + formatCurrency(value) + '}';  // Green for positive
                     } else {
-                        return '{positive|Net Profit: ' + value + '}';  // Green for positive
+                        return '{positive|Net Profit: ' + formatCurrency(value) + '}';  // Green for positive
                     }
                 } else {
                     if (value) {
-                        return '{default|' + key + ': ' + value + '}';  // Black for default
+                        return '{default|' + formatKey(key) + ': ' + formatCurrency(value) + '}';  // Black for default
                     } else {
                         return '{default|' + key + '}';
                     }
@@ -126,6 +134,14 @@ function loadScript(url, callback) {
             result += subData.join('\n');
             return result;
         }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0, // This removes cents if you don't need them
+            }).format(value);
+        }        
 
         function renderCharts(echarts, encrypteddata, inyearlydata, CryptoJS) {
             if (typeof echarts === 'undefined') {

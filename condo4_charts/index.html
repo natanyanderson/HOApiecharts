@@ -30,13 +30,7 @@
     </style>
 </head>
 <body>
-    <h1>Compare HOA Expenses Pie Charts for Selected Years</h1>
-
-    <div class="password-prompt">
-        <label for="password">Enter Password:</label>
-        <input type="password" id="password" placeholder="Enter password" />
-        <button onclick="submitPassword()">Submit</button>
-    </div>
+    <h1>Compare Condo 4 Expenses Pie Charts for Selected Years</h1>
 
     <div>
         <label for="year1">Year 1:</label>
@@ -58,6 +52,9 @@
     </div>
     <div class="iframe-container-line">
         <iframe id="iframe3" src=""></iframe>
+    </div>
+    <div class="iframe-container-bar">
+        <iframe id="iframe4" src=""></iframe>
     </div>
 
     <script>
@@ -103,19 +100,16 @@
             const year2 = year2Dropdown.value;
             document.getElementById('iframe1').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year1}`;
             document.getElementById('iframe2').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year2}`;
-            document.getElementById('iframe3').src = `./linechart.html?password=${encodeURIComponent(password)}`;
+            document.getElementById('iframe3').src = `./linechart.html`;
+            document.getElementById('iframe4').src = `./maintenance_reserves.html`;
         }
 
         // Add event listeners to dropdowns
         year1Dropdown.addEventListener('change', () => {
-            if (password) {
-                updateIframes();
-            }
+            updateIframes();
         });
         year2Dropdown.addEventListener('change', () => {
-            if (password) {
-                updateIframes();
-            }
+            updateIframes();
         });
 
 
@@ -146,6 +140,8 @@
             const year2Dropdown = document.getElementById('year2');
             year2Dropdown.value = selectedYear+1;
         });        
+
+        updateIframes();
 
     </script>
 </body>
