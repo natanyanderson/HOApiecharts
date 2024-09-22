@@ -1,0 +1,185 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HOA Voting Data</title>
+    <script type="text/javascript">
+        function loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            
+            if (script.readyState) {  // IE
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  // Others
+                script.onload = function () {
+                    callback();
+                };
+            }
+            
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+        // Load RequireJS asynchronously
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js", function () {
+            console.log('RequireJS loaded.');
+
+            requirejs.config({
+                paths: {
+                    echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
+                    datadilution: 'https://dprophet.github.io/HOApiecharts/HOA%20pie%20charts/datadilution' // Update with the correct path to your data.js file
+                }
+            });
+
+            // Load ECharts and the data module
+            requirejs(['echarts', 'datadilution'], function(echarts, datadilution) {
+                renderCharts(echarts, datadilution);
+            });
+        });
+
+        function renderCharts(echarts, data) {
+            if (typeof echarts === 'undefined') {
+                console.error('ECharts library not loaded.');
+                return;
+            }
+
+            var boardDistributionChart = echarts.init(document.getElementById('boardDistribution'));
+            var sizeDistributionChart = echarts.init(document.getElementById('sizeDistribution'));
+            var fiancialDistributionChart = echarts.init(document.getElementById('fiancialDistribution'));
+            var dilutedRepresentationChart = echarts.init(document.getElementById('dilutedRepresentation'));
+
+            var boardDistributionOption = {
+                title: {
+                    text: 'Board Member Distribution',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: 'Board Members',
+                        type: 'pie',
+                        radius: '50%',
+                        data: data.boardDistributionData,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            var sizeDistributionOption = {
+                title: {
+                    text: 'Number of units per condo',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: 'Votes',
+                        type: 'pie',
+                        radius: '50%',
+                        data: data.sizeDistributionData,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            var fiancialDistributionOption = {
+                title: {
+                    text: 'Financial per Condo',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: 'Votes',
+                        type: 'pie',
+                        radius: '50%',
+                        data: data.financialDistributionData,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            var dilutedRepresentationOption = {
+                title: {
+                    text: 'Board Voting Power (based on size)',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: 'Voting Power',
+                        type: 'pie',
+                        radius: '50%',
+                        data: data.dilutedRepresentationData,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            boardDistributionChart.setOption(boardDistributionOption);
+            sizeDistributionChart.setOption(sizeDistributionOption);
+            dilutedRepresentationChart.setOption(dilutedRepresentationOption);
+            fiancialDistributionChart.setOption(fiancialDistributionOption);
+        }
+    </script>
+</head>
+<body>
+    <div id="boardDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="sizeDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="fiancialDistribution" style="width: 600px; height: 400px;"></div>
+    <div id="dilutedRepresentation" style="width: 600px; height: 400px;"></div>
+</body>
+</html>

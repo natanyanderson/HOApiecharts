@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Condo 4 Expenses Pie Charts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .iframe-container {
+            width: 49%;
+        }
+        .iframe-container-line {
+            width: 90%;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        .password-prompt {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Condo 4 Expenses Pie Charts for Selected Years</h1>
+
+    <div>
+        <label for="year1">Year 1:</label>
+        <select id="year1">
+            <!-- Options will be added by JavaScript -->
+        </select>
+        <label for="year2">Year 2:</label>
+        <select id="year2">
+            <!-- Options will be added by JavaScript -->
+        </select>
+    </div>
+    <div class="container">
+        <div class="iframe-container">
+            <iframe id="iframe1" src=""></iframe>
+        </div>
+        <div class="iframe-container">
+            <iframe id="iframe2" src=""></iframe>
+        </div>
+    </div>
+    <div class="iframe-container-line">
+        <iframe id="iframe3" src=""></iframe>
+    </div>
+    <div class="iframe-container-bar">
+        <iframe id="iframe4" src=""></iframe>
+    </div>
+
+    <script>
+        let password = '';
+
+        // Define the range of years for the files
+        const years = Array.from({length: 17}, (_, i) => 2006 + i);
+
+        // Get dropdown elements
+        const year1Dropdown = document.getElementById('year1');
+        const year2Dropdown = document.getElementById('year2');
+
+        // Populate dropdowns with year options
+        years.forEach(year => {
+            const option1 = document.createElement('option');
+            option1.value = year;
+            option1.textContent = year;
+            year1Dropdown.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = year;
+            option2.textContent = year;
+            year2Dropdown.appendChild(option2);
+        });
+
+        // Set initial values
+        year1Dropdown.value = 2006;
+        year2Dropdown.value = 2022;
+
+        // Prompt for password and update iframes when password is entered
+        function submitPassword() {
+            password = document.getElementById('password').value | 'Condo4R*ks';
+            if (!password) {
+                alert('Please enter a password!');
+                return;
+            }
+            updateIframes();
+        }
+
+        // Update iframes based on selected years and pass the password
+        function updateIframes() {
+            const year1 = year1Dropdown.value;
+            const year2 = year2Dropdown.value;
+            document.getElementById('iframe1').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year1}`;
+            document.getElementById('iframe2').src = `./expenses_pie_chart.html?password=${encodeURIComponent(password)}&year=${year2}`;
+            document.getElementById('iframe3').src = `./linechart.html`;
+            document.getElementById('iframe4').src = `./maintenance_reserves.html`;
+        }
+
+        // Add event listeners to dropdowns
+        year1Dropdown.addEventListener('change', () => {
+            updateIframes();
+        });
+        year2Dropdown.addEventListener('change', () => {
+            updateIframes();
+        });
+
+
+        // Listen for messages in the iframe (for testing purposes)
+        window.addEventListener('message', function(event) {
+            console.log('index: Message received in expenses_pie_chart iframe:', event.data);
+
+            let selectedYear = parseInt(event.data.year);
+
+            console.log('index: selectedYear=', selectedYear);
+
+            // Forward the message to the target iframe (pie charts)
+            const pieChartIframe1 = document.getElementById('iframe1');
+            const existingSrcUrl1 = new URL(pieChartIframe1.src);  // Parse the existing iframe URL
+            existingSrcUrl1.searchParams.set('year', selectedYear);  // Update the 'year' parameter
+            // Optionally ensure other parameters like 'password' remain unchanged
+            // existingSrcUrl.searchParams.set('password', existingSrcUrl.searchParams.get('password'));
+            pieChartIframe1.src = existingSrcUrl1.toString();
+            const year1Dropdown = document.getElementById('year1');
+            year1Dropdown.value = selectedYear;
+
+            const pieChartIframe2 = document.getElementById('iframe2');
+            const existingSrcUrl2 = new URL(pieChartIframe2.src);  // Parse the existing iframe URL
+            existingSrcUrl2.searchParams.set('year', selectedYear+1);  // Update the 'year' parameter
+            // Optionally ensure other parameters like 'password' remain unchanged
+            // existingSrcUrl.searchParams.set('password', existingSrcUrl.searchParams.get('password'));
+            pieChartIframe2.src = existingSrcUrl2.toString();
+            const year2Dropdown = document.getElementById('year2');
+            year2Dropdown.value = selectedYear+1;
+        });        
+
+        updateIframes();
+
+    </script>
+</body>
+</html>

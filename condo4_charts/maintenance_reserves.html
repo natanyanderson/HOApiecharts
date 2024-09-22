@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Falcon Report: Maintenance and Reserve Analysis</title>
+    <script type="text/javascript">
+
+        function loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            
+            if (script.readyState) {  // IE
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  // Others
+                script.onload = function () {
+                    callback();
+                };
+            }
+            
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+        // Load RequireJS asynchronously
+        loadScript("scripts/require.min.js", function () {
+            console.log('RequireJS loaded.');
+
+            requirejs.config({
+                paths: {
+                    echarts: 'scripts/echarts.min',
+                    'condo_4_schedule': 'condo_4_schedule',
+                    'crypto-js': 'scripts/crypto-js.min'
+                }
+            });
+
+            // Load ECharts and the data module
+            requirejs(['echarts', 'condo_4_schedule', 'crypto-js'], function(echarts, inscheduledata, CryptoJS) {
+                renderCharts(echarts, inscheduledata, CryptoJS);
+            });
+        });
+
+        function convertDataToEcharts(yearlydata, year) {
+            const years = Object.keys(yearlydata);  // ["2020", "2021", "2022"]
+            const totalAssets = years.map(year => yearlydata[year].assets["Total Assets"]);
+
+            return expensesData;
+        }        
+
+        function convertDataToLegend(yearlydata, year) {
+            return  Object.keys(yearlydata[year].expenses);
+        }        
+
+        function generateSubtext(income) {
+
+            const subData = Object.keys(income).map(key => {
+                if (income[key]) {
+                    return key.toLocaleString() + ": " + income[key].toLocaleString();
+                } else {
+                    return key.toLocaleString();
+                }
+            });
+
+            console.log("generateSubtext: subData=", subData);
+
+            const result = subData.join('\n');
+
+            return result;
+        }
+
+        function formatCurrency2(value) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+        }
+
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0, // This removes cents if you don't need them
+            }).format(value);
+        }        
+
+        function renderCharts(echarts, inscheduledata, CryptoJS) {
+            if (typeof echarts === 'undefined') {
+                console.error('ECharts library not loaded.');
+                return;
+            }
+
+            var mychart = echarts.init(
+                        document.getElementById('eventTimeLine'), 'white', {renderer: 'canvas'});
+
+
+            // Generating tooltip data
+            const dataobj = [];
+            let yearIndex = 0;
+
+            Object.entries(inscheduledata.yearly).forEach(([year, details]) => {
+                let descriptionLines = Object.entries(details.maintenance).map(([key, value]) => 
+                    `${key}: ${formatCurrency(value)}`).join('<br>');
+                
+                let val = (details.expenses ? formatCurrency(details.expenses) : 0);
+
+                dataobj.push({
+                    name: year,
+                    value: details.expenses || 0, // Use 0 if expenses are undefined
+                    description: descriptionLines || 'No maintenance data',
+                    itemStyle: { color: inscheduledata.colors[yearIndex % inscheduledata.colors.length] },
+                    label: { show: true, position: 'right' }
+                });
+                yearIndex++;
+            });
+
+            console.log(dataobj);
+
+            // Chart configuration
+            var option = {
+                baseOption: {
+                    title: {
+                        text: 'Falcon Report: Maintenance schedules and reserve analysis',
+                        left: 'center',
+                        top: 20,
+                        textStyle: {
+                            color: '#333',
+                            fontSize: 20,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (params) {
+                            return `YEAR: ${params.name}<br/>TOTAL: ${formatCurrency(params.value)}<br/>Details: ${params.data.description}`;
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data:  Object.keys(inscheduledata.yearly),
+                    },
+                    series: [
+                        {
+                            type: 'bar',
+                            data: dataobj,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: function (params) {
+                                    return formatCurrency(params.value);
+                                }
+                            }
+                        }
+                    ]
+                },
+                options: [
+                    {
+                        title: { text: 'Event 1 Details' },
+                    },
+                    {
+                        title: { text: 'Event 2 Details' },
+                    },
+                    {
+                        title: { text: 'Event 3 Details' },
+                    }
+                ]
+            };
+
+            mychart.setOption(option);
+
+        }
+
+        // Listen for messages in the iframe (for testing purposes)
+        window.addEventListener('message', function(event) {
+            console.log('expenses_pie_chart: Message received in expenses_pie_chart iframe:', event.data);
+        });
+    </script>
+
+</head>
+<body >
+    <div id="eventTimeLine" class="chart-container" style="width:90%; height:500px;"></div>
+</body>
+</html>
