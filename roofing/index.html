@@ -6,10 +6,70 @@
     <title>Roofing project</title>
     <link rel="stylesheet" href="ol.css">
     <style>
-    .map {
-        width: 100%;
-        height: 1200px;
-    }
+        .highlight {
+            background-color: yellow; /* Change to whatever highlight color you want */
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: white;
+            border: 1px solid black;
+            padding: 5px;
+            display: none; /* Start hidden */
+            pointer-events: none; /* Make sure the tooltip doesn't interfere with mouse events */
+            z-index: 1000;
+            white-space: nowrap; /* Prevent the text from wrapping */
+            font-size: 12px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        .tooltip table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .tooltip table, .tooltip th, .tooltip td {
+            border: 1px solid black;
+        }
+        .tooltip th, .tooltip td {
+            padding: 4px;
+            text-align: left;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 1200px; /* Fixed height for the map */
+        }
+        .map {
+            width: 70%; /* Map takes 70% of the container's width */
+            height: 100%; /* Map stays at full height of its parent */
+        }
+        .table-wrapper {
+            width: 30%; /* Table takes 30% of the container's width */
+            height: 100%; /* Set a fixed height for the scrollable table area */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border-left: 1px solid #ccc; /* Optional: Add a border to separate the map and table */
+        }
+        .table-container {
+            width: 30%; /* Table takes 30% of the container's width */
+            padding: 10px;
+            border-left: 1px solid #ccc; /* Optional: Add a border to separate the map and table */
+            overflow-y: auto; /* Add scroll if the table gets too long */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
     </style>
     <script type="text/javascript">
 
@@ -59,6 +119,122 @@
             });
         });
 
+        const currencyFormatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
+
+        // Function to highlight the corresponding table row
+        function highlightTableRow(address) {
+            const rows = document.querySelectorAll('#table-container table tr'); // Select all rows
+            const tableContainer = document.querySelector('.table-wrapper'); // Table scrollable container
+
+            rows.forEach((row) => {
+                const cell = row.querySelector('td'); // Get the first cell (which contains the address)
+
+                if (cell && cell.innerText === address) {
+                    row.classList.add('highlight'); // Add highlight class to matched row
+
+                    // Calculate the row's position relative to the scrollable container
+                    const rowTop = row.offsetTop;
+                    const containerScrollTop = tableContainer.scrollTop;
+                    const containerHeight = tableContainer.clientHeight;
+                    const rowHeight = row.clientHeight;
+
+                    // If the row is out of view, scroll it into view in the container
+                    if (rowTop < containerScrollTop || rowTop + rowHeight > containerScrollTop + containerHeight) {
+                        // Scroll the container so that the row is in the center of the view
+                        tableContainer.scrollTop = rowTop - containerHeight / 2 + rowHeight / 2;
+                    }                    
+                } else {
+                    row.classList.remove('highlight'); // Remove highlight from other rows
+                }
+            });
+        }
+
+        function renderTable(data, map) {
+            let totalEstimate = 0; // Variable to track total estimate
+
+            // Find the container where you want to insert the table
+            const tableContainer = document.getElementById('table-container');
+
+            // Create the table element
+            const table = document.createElement('table');
+            table.border = '1';
+
+            // Create the table header
+            const headerRow = document.createElement('tr');
+            const addressHeader = document.createElement('th');
+            const estimateHeader = document.createElement('th');
+            const replacedDate = document.createElement('th');
+            addressHeader.innerText = 'Address';
+            estimateHeader.innerText = 'Estimate';
+            replacedDate.innerText = 'Replaced';
+            headerRow.appendChild(addressHeader);
+            headerRow.appendChild(estimateHeader);
+            headerRow.appendChild(replacedDate);
+            table.appendChild(headerRow);
+
+            // Populate the table rows with data
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                const addressCell = document.createElement('td');
+                const estimateCell = document.createElement('td');
+                const completionCell = document.createElement('td');
+                addressCell.innerText = item.address;
+                completionCell.innerText = item.replaced;
+                
+
+                if (item.replaced && item.replaced.length > 0) {
+                    // Format estimate as currency and highlight in green
+                    estimateCell.innerText = currencyFormatter.format(item.estimate);
+                    estimateCell.style.color = 'green'; // Highlight the price in green
+                    // Do not add this estimate to the total
+                } else if (item.estimate && item.estimate !== -1) {
+                    // Format estimate as currency if valid
+                    estimateCell.innerText = currencyFormatter.format(item.estimate);
+                    totalEstimate += item.estimate;
+                } else {
+                    // Leave the estimate cell empty if the estimate is empty or -1
+                    estimateCell.innerText = '';
+                }
+
+                // Add an event listener to highlight the corresponding feature on the map
+                row.addEventListener('click', () => {
+                    // This is where you'd zoom in on the corresponding feature on the map
+                    // or highlight it. You could do this by tracking the feature's index
+                    // or by using the feature's geometry coordinates.
+                    console.log(`Feature ${item.address} clicked`);
+                    // E.g., center the map on the feature:
+                    map.getView().setCenter(item.location);
+                    map.getView().setZoom(21);
+                });
+
+                row.appendChild(addressCell);
+                row.appendChild(estimateCell);
+                row.appendChild(completionCell);
+                table.appendChild(row);
+            });
+
+            // Add a total row at the end of the table
+            const totalRow = document.createElement('tr');
+            const totalLabelCell = document.createElement('td');
+            totalLabelCell.innerText = 'Total';
+            totalLabelCell.style.fontWeight = 'bold'; // Make the total label bold
+
+            const totalEstimateCell = document.createElement('td');
+            totalEstimateCell.innerText = currencyFormatter.format(totalEstimate); // Format total as currency
+            totalEstimateCell.style.fontWeight = 'bold'; // Make the total value bold
+
+            totalRow.appendChild(totalLabelCell);
+            totalRow.appendChild(totalEstimateCell);
+            table.appendChild(totalRow);
+
+            // Clear the previous table content (if any) and append the new table
+            tableContainer.innerHTML = '';
+            tableContainer.appendChild(table);
+        }
 
         function renderCharts(ol, condo1, condo2, condo3, condo4) {
             if (typeof ol === 'undefined') {
@@ -67,6 +243,13 @@
             }
 
             ol.proj.useGeographic();
+
+            const condo4Data = condo4.features.map(feature => ({
+                address: feature.properties.address,
+                estimate: feature.properties.estimate,
+                location: feature.geometry.coordinates[0][0],
+                replaced: feature.properties.month_replaced
+            }));
 
             const image = new ol.style.Circle({
                 radius: 5,
@@ -113,6 +296,16 @@
                     }),
                     fill: new ol.style.Fill({
                     color: 'rgba(0, 0, 255, 0.1)',
+                    }),
+                }),
+                'condo4_completed': new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                    color: 'red',
+                    lineDash: [4],
+                    width: 3,
+                    }),
+                    fill: new ol.style.Fill({
+                    color: 'rgba(0, 255, 0, 0.1)',
                     }),
                 }),
                 'Point': new ol.style.Style({
@@ -219,7 +412,17 @@
             });
 
             const styleCondo4 = function (feature) {
-                return styles['condo4'];
+                if (feature.getProperties().month_replaced && feature.getProperties().month_replaced.length > 0) {
+                    return styles['condo4_completed'];
+
+                    let tempstyle = styles['condo4'].clone();
+                    let fill = styles['condo4'].getFill();
+                    fill.setColor('rgba(0, 255, 0, 0.1)');
+                    console.log("changing addr:", feature.values_.address, " to:",fill);
+                    return tempstyle;
+                } else {
+                    return styles['condo4'];
+                }
             };
 
             const vectorCondo4 = new ol.source.Vector({
@@ -248,6 +451,67 @@
             }),
             });
 
+            renderTable(condo4Data, map);
+
+            // Tooltip element reference
+            const tooltip = document.getElementById('tooltip');
+
+            // Add pointermove event listener for the tooltip
+            map.on('pointermove', function (event) {
+                const pixel = map.getEventPixel(event.originalEvent);
+                const feature = map.forEachFeatureAtPixel(pixel, function (feature) {
+                    return feature;
+                });
+
+                if (feature) {
+                    const properties = feature.getProperties();
+                    let tooltipContent = '<table><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>';
+
+                    // Loop through properties and display key-value pairs
+                    for (const key in properties) {
+                        if (key === 'estimate') {
+                            if ( properties[key] !== -1) {
+                                price = currencyFormatter.format(properties[key]);
+                                tooltipContent += `<tr><td><strong>${key}</strong></td><td>${price}</td></tr>`;
+                            } else {
+                                tooltipContent += `<tr><td><strong>${key}</strong></td><td>UNKNOWN</td></tr>`;
+                            }
+                        } else if (key !== 'geometry') {  // Ignore the geometry property
+                            tooltipContent += `<tr><td><strong>${key}</strong></td><td>${properties[key]}</td></tr>`;
+                        }
+                    }
+
+                    tooltipContent += '</tbody></table>';
+                    tooltip.innerHTML = tooltipContent;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = event.pixel[0] + 'px';
+                    tooltip.style.top = event.pixel[1] + 'px';
+                } else {
+                    tooltip.style.display = 'none';
+                }
+            });
+
+            // Hide the tooltip when the mouse leaves the map
+            map.getViewport().addEventListener('mouseout', function () {
+                tooltip.style.display = 'none';
+            });
+
+            // Click event listener to highlight the corresponding row in the table
+            map.on('click', function (event) {
+                const feature = map.forEachFeatureAtPixel(event.pixel, function (feature) {
+                    return feature;
+                });
+
+                console.log("map.click ", feature);
+
+                if (feature) {
+                    const properties = feature.getProperties();
+                    const address = properties.address; // Assuming 'address' is the key to match with table
+
+                    // Find and highlight the table row with the same address
+                    highlightTableRow(address);
+                }
+            });            
         }
 
     </script>
@@ -255,7 +519,11 @@
 </head>
 
 <body>
-    <div id="map" class="map"></div>
+    <div class="container">
+        <div id="map" class="map"></div>
+        <div id="table-container" class="table-wrapper">
+    </div>
+    <div id="tooltip" class="tooltip"></div>
 </body>
 
 </html>
