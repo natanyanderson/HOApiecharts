@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Awesome-pyecharts</title>
+    <title>HOA Pie Charts</title>
     <script type="text/javascript">
 
 function loadScript(url, callback) {
             var script = document.createElement("script");
             script.type = "text/javascript";
-            
+
             if (script.readyState) {  // IE
                 script.onreadystatechange = function () {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -21,18 +21,18 @@ function loadScript(url, callback) {
                     callback();
                 };
             }
-            
+
             script.src = url;
             document.getElementsByTagName("head")[0].appendChild(script);
         }
 
         // Load RequireJS asynchronously
-        loadScript("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js", function () {
+        loadScript("scripts/require.min.js", function () {
             console.log('RequireJS loaded.');
 
             requirejs.config({
                 paths: {
-                    echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
+                    echarts: 'scripts/echarts.min',
                     'yearly-data': 'hoa_yearlydata'
                 }
             });
@@ -61,17 +61,25 @@ function loadScript(url, callback) {
             });
 
             return expensesData;
-        }        
+        }
 
         function convertDataToLegend(yearlydata, year) {
             return  Object.keys(yearlydata[year].expenses);
-        }        
+        }
+
+        function formatKey(inKey) {
+            if (inKey.startsWith("\t")) {
+                return "\t\u2022" + inKey;
+            }
+                return inKey;
+        }
+
 
         function generateSubtext(income) {
 
             const subData = Object.keys(income).map(key => {
                 if (income[key]) {
-                    return key.toLocaleString() + ": " + income[key].toLocaleString();
+                    return key.toLocaleString() + ": " + formatCurrency(income[key]);
                 } else {
                     return key.toLocaleString();
                 }
@@ -82,6 +90,47 @@ function loadScript(url, callback) {
             const result = subData.join('\n');
 
             return result;
+        }
+
+        function getTitleWithColoredText(yearlydata, year) {
+            let titleText = '';
+            const income = yearlydata[year].income;
+
+            let result = "Expenses Distribution for " + year + "\n\n";
+
+            // Loop through the keys to generate the title text with proper formatting
+            const subData = Object.keys(income).map(key => {
+                const value = income[key];
+                console.log("getTitleWithColoredText: key=", key)
+                if (key.startsWith('Net Profit')) {
+                    const colorTag = value >= 0 ? 'positive' : 'negative';
+
+                    if ( value <= 0 ) {
+                        return '{negative|Net Profit(Loss): ' + formatCurrency(value) + '}';
+                    } else {
+                        return '{positive|Net Profit: ' + formatCurrency(value) + '}';
+                    }
+                } else {
+                    if (value) {
+                        return '{default|' + formatKey(key) + ': ' + formatCurrency(value) + '}';
+                    } else {
+                        return '{default|' + key + '}';
+                    }
+                }
+            });
+
+            console.log("getTitleWithColoredText: subData=", subData)
+
+            result += subData.join('\n');
+            return result;
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+            }).format(value);
         }
 
         function renderCharts(echarts, yearlydata) {
@@ -102,7 +151,7 @@ function loadScript(url, callback) {
 
             const legendData = convertDataToLegend(yearlydata, year);
 
-            const subTextData = generateSubtext(yearlydata[year].income);
+            const subTextData = getTitleWithColoredText(yearlydata, year);
 
             var option = {
                 "animation": true,
@@ -228,35 +277,41 @@ function loadScript(url, callback) {
                 },
                 "title": [
                     {
-                        "show": false,
-                        "text": "Expenses Distribution for " + year,
+                        "show": true,
+                        "text": subTextData,
                         "target": "blank",
-                        "subtext": subTextData,
-                        "subtarget": "blank",
                         "padding": 5,
                         "itemGap": 10,
                         "textAlign": "auto",
                         "textVerticalAlign": "auto",
                         "triggerEvent": false,
                         "textStyle": {
+                            "rich": {
+                                "positive": {
+                                    "color": "green",
+                                },
+                                "negative": {
+                                    "color": "red",
+                                },
+                                "default": {
+                                    "color": "black",
+                                }
+                            },
+                            "fontSize": 14,
                             "fontWeight": "bold",
-                            "fontSize": 20
-                        },
-                        "subtextStyle": {
-                            "fontWeight": "bold",
-                            "fontSize": 14
+                            "lineHeight": 20
                         }
                     }
                 ]
             };
-        
+
             mychart.setOption(option);
 
             // Add event listener for mouseover (show title)
             mychart.on('mouseover', function () {
                 mychart.setOption({
                     title: {
-                        show: true  // Show the title when mouse is over the chart
+                        show: true
                     }
                 });
             });
@@ -265,11 +320,16 @@ function loadScript(url, callback) {
             mychart.on('mouseout', function () {
                 mychart.setOption({
                     title: {
-                        show: false  // Hide the title when mouse leaves the chart
+                        show: true
                     }
                 });
             });
         }
+
+        // Listen for messages in the iframe (for testing purposes)
+        window.addEventListener('message', function(event) {
+            console.log('expenses_pie_chart: Message received in expenses_pie_chart iframe:', event.data);
+        });
 
     </script>
 

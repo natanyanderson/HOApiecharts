@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HOA Line Chart</title>
+    <script type="text/javascript">
+
+        function loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+
+            if (script.readyState) {  // IE
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  // Others
+                script.onload = function () {
+                    callback();
+                };
+            }
+
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+        // Load RequireJS asynchronously
+        loadScript("scripts/require.min.js", function () {
+            console.log('RequireJS loaded.');
+
+            requirejs.config({
+                paths: {
+                    echarts: 'scripts/echarts.min',
+                    'yearly-data': 'hoa_yearlydata'
+                }
+            });
+
+            // Load ECharts and the data module
+            requirejs(['echarts', 'yearly-data'], function(echarts, yearlydata) {
+                renderCharts(echarts, yearlydata);
+            });
+        });
+
+        // Function to iterate over the data structure and populate the selection box
+        function populateSeriesSelectionBox(data) {
+            const selectBox = document.getElementById('seriesSelect');
+            const seriesSet = new Set();
+
+            // Iterate over each year and collect all series names from expenses, income, and assets
+            for (const year in data) {
+                const yearData = data[year];
+
+                Object.keys(yearData.expenses || {}).forEach(key => seriesSet.add(key));
+                Object.keys(yearData.income || {}).forEach(key => seriesSet.add(key));
+                Object.keys(yearData.assets || {}).forEach(key => seriesSet.add(key));
+            }
+
+            const sortedSeriesArray = Array.from(seriesSet).sort();
+
+            // Populate the selection box with the sorted series names
+            sortedSeriesArray.forEach(series => {
+                const option = document.createElement('option');
+                option.value = series;
+                option.textContent = series;
+                selectBox.appendChild(option);
+            });
+        }
+
+        // Function to update the chart when a series is selected
+        function updateChart(seriesName, yearlydata, mychart) {
+            const years = Object.keys(yearlydata);
+            const seriesData = years.map(year => {
+                return yearlydata[year].expenses[seriesName] ||
+                       yearlydata[year].income[seriesName] || 0
+            });
+
+            const minY = Math.min(...seriesData);
+            const maxY = Math.max(...seriesData);
+
+            const option = {
+                title: {
+                    text: `Series: ${seriesName}`
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: years
+                },
+                yAxis: {
+                    type: 'value',
+                    min: minY,
+                    max: maxY
+                },
+                series: [
+                    {
+                        name: seriesName,
+                        type: 'line',
+                        data: seriesData,
+                        itemStyle: {
+                            color: 'blue'
+                        }
+                    }
+                ]
+            };
+
+            mychart.setOption(option);
+        }
+
+
+        function renderCharts(echarts, yearlydata) {
+            if (typeof echarts === 'undefined') {
+                console.error('ECharts library not loaded.');
+                return;
+            }
+
+            console.log("linechart: yearlydata");
+            console.log(JSON.stringify(yearlydata));
+
+            var mychart = echarts.init(
+                        document.getElementById('lineChart'), 'white', {renderer: 'canvas'});
+
+            populateSeriesSelectionBox(yearlydata);
+
+            updateChart("Total Expenses", yearlydata, mychart);
+
+            // Event listener for when a user selects a series from the dropdown
+            document.getElementById('seriesSelect').addEventListener('change', function() {
+                const selectedSeries = this.value;
+                console.log("linechart:seriesSelect: selectedSeries=", selectedSeries);
+                updateChart(selectedSeries, yearlydata, mychart);
+            });
+
+            // Event listener for clicking on the line chart to sync year with pie charts
+            mychart.on('click', function (params) {
+                console.log("mychart.on: params", params);
+                    if (params.seriesName) {
+                    const selectedYear = params.name;
+                    console.log('Year selected:', selectedYear);
+
+                    window.parent.postMessage({ year: selectedYear }, '*');
+                }
+            });
+        }
+
+        // Listen for messages in the iframe
+        window.addEventListener('message', function(event) {
+            console.log('linechart: Message received:', event.data);
+        });
+    </script>
+
+</head>
+<body >
+    <label for="seriesSelect">Select Series:</label>
+    <select id="seriesSelect">
+        <option value="" disabled selected>Select a series</option>
+    </select>
+    <div id="lineChart" class="chart-container" style="width:90%; height:500px;"></div>
+</body>
+</html>
