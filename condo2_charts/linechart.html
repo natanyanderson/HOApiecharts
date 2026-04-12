@@ -8,7 +8,7 @@
         function loadScript(url, callback) {
             var script = document.createElement("script");
             script.type = "text/javascript";
-            
+
             if (script.readyState) {  // IE
                 script.onreadystatechange = function () {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -21,7 +21,7 @@
                     callback();
                 };
             }
-            
+
             script.src = url;
             document.getElementsByTagName("head")[0].appendChild(script);
         }
@@ -33,7 +33,7 @@
             requirejs.config({
                 paths: {
                     echarts: 'scripts/echarts.min',
-                    'yearly-data': 'condo_4_data'
+                    'yearly-data': 'condo_2_data'
                 }
             });
 
@@ -60,11 +60,11 @@
             const totalAssets = years.map(year => yearlydata[year].assets["Total Assets"]);
 
             return expensesData;
-        }        
+        }
 
         function convertDataToLegend(yearlydata, year) {
             return  Object.keys(yearlydata[year].expenses);
-        }        
+        }
 
         function generateSubtext(income) {
 
@@ -147,8 +147,8 @@
             const years = Object.keys(yearlydata);  // Get the years in the dataset
             const seriesData = years.map(year => {
                 // Return the series value from expenses, income, or assets
-                return yearlydata[year].expenses[seriesName] || 
-                       yearlydata[year].income[seriesName] || 
+                return yearlydata[year].expenses[seriesName] ||
+                       yearlydata[year].income[seriesName] ||
                        yearlydata[year].assets[seriesName] || null;  // Default to 0 if not found
             });
 
@@ -278,7 +278,7 @@
                 const selectedSeries = this.value;  // Get the selected series
                 console.log("linechart:seriesSelect: selectedSeries=", selectedSeries);
                 updateChart(selectedSeries, yearlydata, mychart);  // Update the chart with the selected series
-            });        
+            });
 
             // Event listener for clicking on the 'Total Assets (Actual)' line
             mychart.on('click', function (params) {
@@ -288,11 +288,9 @@
                     console.log('Year selected:', selectedYear);
 
                     // Sending the year to the iframe
-                    //const iframe = document.parent.getElementById('iframe3');
-                    //iframe.contentWindow.postMessage({ year: selectedYear }, '*');  // Send the selected year
-                    window.parent.postMessage({ year: selectedYear }, '*'); 
+                    window.parent.postMessage({ year: selectedYear }, '*');
                 }
-            });        
+            });
         }
 
         // Listen for messages in the iframe (for testing purposes)

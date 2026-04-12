@@ -8,7 +8,7 @@
 function loadScript(url, callback) {
             var script = document.createElement("script");
             script.type = "text/javascript";
-            
+
             if (script.readyState) {  // IE
                 script.onreadystatechange = function () {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -21,7 +21,7 @@ function loadScript(url, callback) {
                     callback();
                 };
             }
-            
+
             script.src = url;
             document.getElementsByTagName("head")[0].appendChild(script);
         }
@@ -33,7 +33,7 @@ function loadScript(url, callback) {
             requirejs.config({
                 paths: {
                     echarts: 'scripts/echarts.min',
-                    'yearly-data': 'condo_4_data'
+                    'yearly-data': 'condo_1_data'
                 }
             });
 
@@ -61,18 +61,18 @@ function loadScript(url, callback) {
             });
 
             return expensesData;
-        }        
+        }
 
         function convertDataToLegend(yearlydata, year) {
             return  Object.keys(yearlydata[year].expenses);
-        }        
+        }
 
         function formatKey(inKey) {
             if (inKey.startsWith("\t")) {
-                return "\t•" + inKey;
+                return "\t\u2022" + inKey;
             }
                 return inKey;
-        }        
+        }
 
 
         function generateSubtext(income) {
@@ -131,7 +131,7 @@ function loadScript(url, callback) {
                 currency: 'USD',
                 minimumFractionDigits: 0, // This removes cents if you don't need them
             }).format(value);
-        }        
+        }
 
         function renderCharts(echarts, yearlydata) {
             if (typeof echarts === 'undefined') {
@@ -139,9 +139,7 @@ function loadScript(url, callback) {
                 return;
             }
 
-            const year = getQueryParams().year || '2003';
-
-            console.log("year=", year);
+            const year = getQueryParams().year || '2017';
 
             var mychart = echarts.init(
                         document.getElementById('pieChart'), 'white', {renderer: 'canvas'});
@@ -305,7 +303,7 @@ function loadScript(url, callback) {
                     }
                 ]
             };
-        
+
             mychart.setOption(option);
 
             // Add event listener for mouseover (show title)
@@ -330,7 +328,7 @@ function loadScript(url, callback) {
         // Listen for messages in the iframe (for testing purposes)
         window.addEventListener('message', function(event) {
             console.log('expenses_pie_chart: Message received in expenses_pie_chart iframe:', event.data);
-        });        
+        });
 
     </script>
 

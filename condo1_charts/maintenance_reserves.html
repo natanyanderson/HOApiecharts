@@ -8,7 +8,7 @@
         function loadScript(url, callback) {
             var script = document.createElement("script");
             script.type = "text/javascript";
-            
+
             if (script.readyState) {  // IE
                 script.onreadystatechange = function () {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -21,7 +21,7 @@
                     callback();
                 };
             }
-            
+
             script.src = url;
             document.getElementsByTagName("head")[0].appendChild(script);
         }
@@ -33,26 +33,26 @@
             requirejs.config({
                 paths: {
                     echarts: 'scripts/echarts.min',
-                    'condo_4_schedule': 'condo_4_schedule'
+                    'condo_1_schedule': 'condo_1_schedule'
                 }
             });
 
             // Load ECharts and the data module
-            requirejs(['echarts', 'condo_4_schedule'], function(echarts, inscheduledata) {
+            requirejs(['echarts', 'condo_1_schedule'], function(echarts, inscheduledata) {
                 renderCharts(echarts, inscheduledata);
             });
         });
 
         function convertDataToEcharts(yearlydata, year) {
-            const years = Object.keys(yearlydata);  // ["2020", "2021", "2022"]
+            const years = Object.keys(yearlydata);
             const totalAssets = years.map(year => yearlydata[year].assets["Total Assets"]);
 
             return expensesData;
-        }        
+        }
 
         function convertDataToLegend(yearlydata, year) {
             return  Object.keys(yearlydata[year].expenses);
-        }        
+        }
 
         function generateSubtext(income) {
 
@@ -82,7 +82,7 @@
                 currency: 'USD',
                 minimumFractionDigits: 0, // This removes cents if you don't need them
             }).format(value);
-        }        
+        }
 
         function renderCharts(echarts, inscheduledata) {
             if (typeof echarts === 'undefined') {
@@ -99,9 +99,9 @@
             let yearIndex = 0;
 
             Object.entries(inscheduledata.yearly).forEach(([year, details]) => {
-                let descriptionLines = Object.entries(details.maintenance).map(([key, value]) => 
+                let descriptionLines = Object.entries(details.maintenance).map(([key, value]) =>
                     `${key}: ${formatCurrency(value)}`).join('<br>');
-                
+
                 let val = (details.expenses ? formatCurrency(details.expenses) : 0);
 
                 dataobj.push({
