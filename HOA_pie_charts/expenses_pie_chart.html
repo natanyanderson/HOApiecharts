@@ -33,14 +33,13 @@ function loadScript(url, callback) {
             requirejs.config({
                 paths: {
                     echarts: 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min',
-                    'encrypted-yearly-data': 'https://natanyanderson.github.io/HOApiecharts/HOA%20pie%20charts/encryptedyearlydata',
-                    'crypto-js': 'scripts/crypto-js.min'
+                    'yearly-data': 'hoa_yearlydata'
                 }
             });
 
             // Load ECharts and the data module
-            requirejs(['echarts', 'encrypted-yearly-data', 'crypto-js'], function(echarts, encrypteddata, CryptoJS) {
-                renderCharts(echarts, encrypteddata, null, CryptoJS);
+            requirejs(['echarts', 'yearly-data'], function(echarts, yearlydata) {
+                renderCharts(echarts, yearlydata);
             });
         });
 
@@ -55,14 +54,6 @@ function loadScript(url, callback) {
                 });
             return params;
         }
-
-        function decryptContent(encrypteddata, password, CryptoJS) {
-            const decrypted = CryptoJS.AES.decrypt(encrypteddata, password);
-            const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-            console.log(decryptedText)
-            const decryptedJSON = JSON.parse(decryptedText);
-            return decryptedJSON;
-        }        
 
         function convertDataToEcharts(yearlydata, year) {
             const expensesData = Object.keys(yearlydata[year].expenses).map(key => {
@@ -93,25 +84,15 @@ function loadScript(url, callback) {
             return result;
         }
 
-        function renderCharts(echarts, encrypteddata, inyearlydata, CryptoJS) {
+        function renderCharts(echarts, yearlydata) {
             if (typeof echarts === 'undefined') {
                 console.error('ECharts library not loaded.');
                 return;
             }
 
-            if ( inyearlydata ) {
-                console.log("inyearlydata");
-                console.log(JSON.stringify(inyearlydata));
-            }
-
-            const password = getQueryParams().password;
             const year = getQueryParams().year || '2003';
 
-            console.log("password=", password, ", year=", year);
-
-            const yearlydata = inyearlydata || decryptContent(encrypteddata, password, CryptoJS);
-
-            console.log("yearlydata=", yearlydata);
+            console.log("year=", year);
 
             var mychart = echarts.init(
                         document.getElementById('pieChart'), 'white', {renderer: 'canvas'});
