@@ -1,3 +1,9 @@
+// Condo IV Capital Reserve Funding Plan (October 2026, re-based to start 1/1/2027).
+// Source: ~/projects/hoa/maintenance_responsibilities/Condo_IV_Reserve_Plan.xlsx and
+// Condo_IV_Statement_of_Income_and_Liabilities.md (Becht 2026 study, Falcon 2022 entity allocations).
+// maintenance/expenses = Long-Term Maintenance disbursements, inflated 3%/yr to the year spent.
+// contributions follow the plan's three-fund rules (3% growth; Emergency and Operating stop once
+// target/floor is reached); closing_balances include 1% interest. Unaudited planning estimates.
 define([], function() {
     return {
         colors: [
@@ -7,236 +13,403 @@ define([], function() {
             '#bebebe', '#800860', '#e6ffbe', '#63429a', '#c8facc', '#000800', '#aac3ff', '#8000ff', '#b1ffd8', '#750000',
             '#606080', '#cfcfcf', '#a919e6', '#194ee6', '#31f46f', '#e619c3', '#46f0b4', '#f0329c', '#bcf06c', '#fabcbe'
         ],
-        yearly: {
-            2022: {
-                maintenance: {
-                    "Driveway-asphalt reconstruction": 170505
+        "yearly": {
+            "2027": {
+                "maintenance": {
+                    "Deck Railings & Balusters (safety)": 23175,
+                    "Exterior Caulk/Sealant & Trim Maintenance": 15450,
+                    "Window Wells (rebuild program)": 49440
                 },
-                expenses: 170505,
-                full_contribution: 343139
+                "expenses": 88065,
+                "full_contribution": 171500,
+                "contributions": {
+                    "Emergency Reserve": 23800,
+                    "Long-Term Maintenance": 135100,
+                    "Operating Reserve": 12600
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 47131,
+                    "Long-Term Maintenance": 139556,
+                    "Operating Reserve": 75118
+                }
             },
-            2023: {
-                maintenance: {
+            "2028": {
+                "maintenance": {
+                    "Entry Stoops — Leveling & Stair Nosing (safety)": 31190,
+                    "Window Wells (rebuild program)": 127308
                 },
-                full_contribution: 343139
+                "expenses": 158498,
+                "full_contribution": 176645,
+                "contributions": {
+                    "Emergency Reserve": 24514,
+                    "Long-Term Maintenance": 139153,
+                    "Operating Reserve": 12978
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 72116,
+                    "Long-Term Maintenance": 121607,
+                    "Operating Reserve": 88847
+                }
             },
-            2024: {
-                maintenance: {
-                    "Walkway-entry stoop, end unit porch": 10609,
-                    "Walkway-entry walk/stair/landing, concrete": 3533
+            "2029": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 181944,
+                "contributions": {
+                    "Emergency Reserve": 25249,
+                    "Long-Term Maintenance": 143328,
+                    "Operating Reserve": 13367
                 },
-                expenses: 14142,
-                full_contribution: 343139
+                "closing_balances": {
+                    "Emergency Reserve": 98087,
+                    "Long-Term Maintenance": 266150,
+                    "Operating Reserve": 103103
+                }
             },
-            2025: {
-                maintenance: {
+            "2030": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 187403,
+                "contributions": {
+                    "Emergency Reserve": 26007,
+                    "Long-Term Maintenance": 147627,
+                    "Operating Reserve": 13768
                 },
-                expenses: 0,
-                full_contribution: 343139
+                "closing_balances": {
+                    "Emergency Reserve": 125075,
+                    "Long-Term Maintenance": 416439,
+                    "Operating Reserve": 117902
+                }
             },
-            2026: {
-                maintenance: {
-                    "BUILDING-Deck-wood reconstruction": 98324,
-                    "BUILDING-Retaining Wall-wood tie wells": 16883
+            "2031": {
+                "maintenance": {
+                    "Chimney Chase Covers": 145095
                 },
-                expenses: 115207,
-                full_contribution: 343139
+                "expenses": 145095,
+                "full_contribution": 152056,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 152056,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 126325,
+                    "Long-Term Maintenance": 427565,
+                    "Operating Reserve": 119081
+                }
             },
-            2027: {
-                maintenance: {
-                    "BUILDING-Roof-shingles, asphalt incl gutters/leaders-": 1145131,
-                    "BUILDING-Deck-wood reconstruction": 104312,
-                    "SITE WORK-Walkway-entry stoop, end unit porch": 12299,
-                    "BUILDING-Retaining Wall-wood tie wells": 16883,
-                    "BUILDING-Deck-wood reconstruction": 101274,
-                    "BUILDING-Roof-chimney caps, large": 45444,
-                    "BUILDING-Roof-chimney caps, small": 15824,
-                    "SITE WORK-Driveway-asphalt seal coat": 10981,
-                    "SITE WORK-Walkway-entry<br>walk/stair/landing, concrete": 3860
+            "2032": {
+                "maintenance": {
+                    "Entry Stoops — Concrete Replacement": 234034
                 },
-                expenses: 1322514,
-                full_contribution: 343139
+                "expenses": 234034,
+                "full_contribution": 156618,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 156618,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 127589,
+                    "Long-Term Maintenance": 354424,
+                    "Operating Reserve": 120272
+                }
             },
-            2028: {
-                maintenance: {
-                    "BUILDING-Deck-wood reconstruction": 104312
+            "2033": {
+                "maintenance": {
+                    "Deck Boards (surface)": 161163,
+                    "Deck Framing & Footings": 184186,
+                    "Deck Railings & Balusters (safety)": 115116,
+                    "Exterior Caulk/Sealant & Trim Maintenance": 18448
                 },
-                expenses: 104312,
-                full_contribution: 262965
+                "expenses": 478913,
+                "full_contribution": 161316,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 161316,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 128865,
+                    "Long-Term Maintenance": 40372,
+                    "Operating Reserve": 121475
+                }
             },
-            2029: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry stoop, end unit porch": 12299
+            "2034": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 166156,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 166156,
+                    "Operating Reserve": 0
                 },
-                expenses: 12299,
-                full_contribution: 262965
+                "closing_balances": {
+                    "Emergency Reserve": 130153,
+                    "Long-Term Maintenance": 206932,
+                    "Operating Reserve": 122690
+                }
             },
-            2030: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 4218
+            "2035": {
+                "maintenance": {
+                    "Entry Stoops — Leveling & Stair Nosing (safety)": 38360
                 },
-                expenses: 4218,
-                full_contribution: 262965
+                "expenses": 38360,
+                "full_contribution": 171141,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 171141,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 131455,
+                    "Long-Term Maintenance": 341782,
+                    "Operating Reserve": 123917
+                }
             },
-            2031: {
-                maintenance: {
+            "2036": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 176275,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 176275,
+                    "Operating Reserve": 0
                 },
-                full_contribution: 262965
+                "closing_balances": {
+                    "Emergency Reserve": 132769,
+                    "Long-Term Maintenance": 521474,
+                    "Operating Reserve": 125156
+                }
             },
-            2032: {
-                maintenance: {
-                    "SITE WORK-Driveway-asphalt seal coat": 12730
+            "2037": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 181563,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 181563,
+                    "Operating Reserve": 0
                 },
-                expenses: 12730,
-                full_contribution: 262965
+                "closing_balances": {
+                    "Emergency Reserve": 134097,
+                    "Long-Term Maintenance": 708252,
+                    "Operating Reserve": 126407
+                }
             },
-            2033: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 4609
+            "2038": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 187010,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 187010,
+                    "Operating Reserve": 0
                 },
-                expenses: 4609,
-                full_contribution: 263962
+                "closing_balances": {
+                    "Emergency Reserve": 135438,
+                    "Long-Term Maintenance": 902345,
+                    "Operating Reserve": 127671
+                }
             },
-            2034: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry stoop, end unit porch": 14258
+            "2039": {
+                "maintenance": {
+                    "Exterior Caulk/Sealant & Trim Maintenance": 22028
                 },
-                expenses: 14258,
-                full_contribution: 263962
+                "expenses": 22028,
+                "full_contribution": 192620,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 192620,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 136792,
+                    "Long-Term Maintenance": 1081961,
+                    "Operating Reserve": 128948
+                }
             },
-            2035: {
-                maintenance: {
-                    "BUILDING-Fence-privacy, vinyl": 11359
+            "2040": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 198399,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 198399,
+                    "Operating Reserve": 0
                 },
-                expenses: 11359,
-                full_contribution: 263962
+                "closing_balances": {
+                    "Emergency Reserve": 138160,
+                    "Long-Term Maintenance": 1291179,
+                    "Operating Reserve": 130238
+                }
             },
-            2036: {
-                maintenance: {
-                    "BUILDING-Retaining Wall-wood tie wells": 22689,
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 5037
+            "2041": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 204351,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 204351,
+                    "Operating Reserve": 0
                 },
-                expenses: 27726,
-                full_contribution: 263962
+                "closing_balances": {
+                    "Emergency Reserve": 139542,
+                    "Long-Term Maintenance": 1508442,
+                    "Operating Reserve": 131540
+                }
             },
-            2037: {
-                maintenance: {
-                    "SITE WORK-Driveway-asphalt reconstruction": 265641
+            "2042": {
+                "maintenance": {
+                    "Entry Stoops — Leveling & Stair Nosing (safety)": 47178
                 },
-                expenses: 265641,
-                full_contribution: 263962
+                "expenses": 47178,
+                "full_contribution": 210481,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 210481,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 140937,
+                    "Long-Term Maintenance": 1686830,
+                    "Operating Reserve": 132855
+                }
             },
-            2038: {
-                maintenance: {
+            "2043": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 216796,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 216796,
+                    "Operating Reserve": 0
                 },
-                full_contribution: 275331
+                "closing_balances": {
+                    "Emergency Reserve": 142347,
+                    "Long-Term Maintenance": 1920494,
+                    "Operating Reserve": 134184
+                }
             },
-            2039: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry stoop, end unit porch": 16528,
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 5504
+            "2044": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 223300,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 223300,
+                    "Operating Reserve": 0
                 },
-                expenses: 22032,
-                full_contribution: 275331
+                "closing_balances": {
+                    "Emergency Reserve": 143770,
+                    "Long-Term Maintenance": 2162998,
+                    "Operating Reserve": 135526
+                }
             },
-            2040: {
-                maintenance: {
+            "2045": {
+                "maintenance": {
+                    "Deck Railings & Balusters (safety)": 164128,
+                    "Exterior Caulk/Sealant & Trim Maintenance": 26303
                 },
-                full_contribution: 275331
+                "expenses": 190431,
+                "full_contribution": 229999,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 229999,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 145208,
+                    "Long-Term Maintenance": 2224196,
+                    "Operating Reserve": 136881
+                }
             },
-            2041: {
-                maintenance: {
+            "2046": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 236899,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 236899,
+                    "Operating Reserve": 0
                 },
-                full_contribution: 275331
+                "closing_balances": {
+                    "Emergency Reserve": 146660,
+                    "Long-Term Maintenance": 2483337,
+                    "Operating Reserve": 138250
+                }
             },
-            2042: {
-                maintenance: {
-                    "SITE WORK-Driveway-asphalt seal coat": 17108,
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 6014
+            "2047": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 244006,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 244006,
+                    "Operating Reserve": 0
                 },
-                expenses: 23123,
-                full_contribution: 275331
+                "closing_balances": {
+                    "Emergency Reserve": 148126,
+                    "Long-Term Maintenance": 2752176,
+                    "Operating Reserve": 139632
+                }
             },
-            2043: {
-                maintenance: {
+            "2048": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 251326,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 251326,
+                    "Operating Reserve": 0
                 },
-                full_contribution: 275331
+                "closing_balances": {
+                    "Emergency Reserve": 149608,
+                    "Long-Term Maintenance": 3031023,
+                    "Operating Reserve": 141029
+                }
             },
-            2044: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry stoop, end unit porch": 19161
+            "2049": {
+                "maintenance": {
+                    "Entry Stoops — Leveling & Stair Nosing (safety)": 58023,
+                    "Siding, Vinyl": 3260083
                 },
-                expenses: 19161,
-                full_contribution: 275331
+                "expenses": 3318106,
+                "full_contribution": 258866,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 258866,
+                    "Operating Reserve": 0
+                },
+                "closing_balances": {
+                    "Emergency Reserve": 151104,
+                    "Long-Term Maintenance": 2093,
+                    "Operating Reserve": 142439
+                }
             },
-            2045: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 6572
+            "2050": {
+                "maintenance": {},
+                "expenses": 0,
+                "full_contribution": 266632,
+                "contributions": {
+                    "Emergency Reserve": 0,
+                    "Long-Term Maintenance": 266632,
+                    "Operating Reserve": 0
                 },
-                expenses: 6572,
-                full_contribution: 275331
-            },
-            2046: {
-                maintenance: {
-                    "BUILDING-Retaining Wall-wood tie wells": 30492
-                },
-                expenses: 30492,
-                full_contribution: 275331
-            },
-            2047: {
-                maintenance: {
-                    "SITE WORK-Driveway-asphalt seal coat": 19833
-                },
-                expenses: 19833,
-                full_contribution: 275331
-            },
-            2048: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 7181
-                },
-                expenses: 7181,
-                full_contribution: 282019
-            },
-            2049: {
-                maintenance: {
-                    "SITE WORK-Walkway-entry stoop, end unit porch": 22213
-                },
-                expenses: 22213,
-                full_contribution: 282019
-            },
-            2050: {
-                maintenance: {
-                },
-                full_contribution: 282019
-            },
-            2051: {
-                maintenance: {
-                    "BUILDING-Deck-wood reconstruction": 205870,
-                    "SITE WORK-Walkway-entry walk/stair/landing, concrete": 7847
-                },
-                expenses: 213717,
-                full_contribution: 282019
-            },
-            2052: {
-                maintenance: {
-                    "BUILDING-Siding-vinyl": 3598659,
-                    "SITE WORK-Driveway-asphalt reconstruction": 413860,
-                    "BUILDING-Deck-wood reconstruction": 212046 
-                },
-                expenses: 4224565,
-                full_contribution: 282019
+                "closing_balances": {
+                    "Emergency Reserve": 152615,
+                    "Long-Term Maintenance": 268745,
+                    "Operating Reserve": 143863
+                }
             }
         },
-        five_threshold_contribution: 209125,
-        ten_threahold_contribution: 236504,
-        starting_balance_2022: 582976
+        "starting_balance_2027": {
+            "Emergency Reserve": 23100,
+            "Long-Term Maintenance": 91605,
+            "Operating Reserve": 61899
+        },
+        "emergency_reserve_target": 125000,
+        "operating_reserve_floor": 117860,
+        "units": 98
     };
 });
-
-
-
-
-
-
-
-

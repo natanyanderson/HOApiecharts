@@ -1,5 +1,37 @@
 define([], function() {
     return {
+        2025: {
+            expenses: {
+                "Office Expenses": 4014,
+                "HOA dues expense": 429240,
+                "Professional fees": 8314,
+                "Insurance": 4090,
+                "Sprinkler system": 19703,
+                "Painting and Plastering": 9509,
+                "Steps": 6340,
+                "Siding": 1920,
+                "Window Wells": 21890,
+                "Other repairs &\nmaintenance": 4943,
+                "Corporate Taxes": 650,
+                "Interest on loan\nindebtedness": 10015,
+                "Roof": 1165268,
+                "Powerwashing &\nDeck staining": 16365
+            },
+            income: {
+                "Revenue": null,
+                "\tCommon Charges": 586056,
+                "\tAssessments": 55272,
+                "\tHOA reimbursement": 30249,
+                "\tInterest Income": 7535,
+                "\tHOA dues income": 429240,
+                "Total Revenue": 1108352,
+                "Total Expenses": 1702261,
+                "Net Profit": -593909
+            },
+            assets: {
+                "Total Assets": 120550
+            }
+        },
         2024: {
             expenses: {
                 "Office Expenses": 1995,
@@ -72,7 +104,7 @@ define([], function() {
         },
         2022: {
             expenses: {
-                "Office expenses": 1738,
+                "Office Expenses": 1738,
                 "HOA dues expense": 449232,
                 "HOA assessments": 58880,
                 "Professional fees": 3333,
@@ -105,7 +137,7 @@ define([], function() {
         },
         2021: {
             expenses: {
-                "Office expenses": 1393,
+                "Office Expenses": 1393,
                 "HOA dues expense": 431592,
                 "HOA assessments": 58879,
                 "Professional fees": 2900,
@@ -139,7 +171,7 @@ define([], function() {
         },
         2020: {
             expenses: {
-                "Office expenses": 1283,
+                "Office Expenses": 1283,
                 "HOA dues expense": 413952,
                 "HOA assessments": 58879,
                 "Professional fees": 2900,
@@ -174,7 +206,7 @@ define([], function() {
         },
         2019: {
             expenses: {
-                "Office expenses": 1047,
+                "Office Expenses": 1047,
                 "HOA dues expense": 390432,
                 "HOA assessments": 58879,
                 "Professional fees": 2900,
@@ -210,7 +242,7 @@ define([], function() {
         },
         2018: {
             expenses: {
-                "Office expenses": 1095,
+                "Office Expenses": 1095,
                 "HOA dues expense": 366912,
                 "HOA assessments": 58879,
                 "Professional fees": 2965,
@@ -243,7 +275,7 @@ define([], function() {
         },
         2017: {
             expenses: {
-                "Office expenses": 1413,
+                "Office Expenses": 1413,
                 "HOA dues expense": 366912,
                 "HOA assessments": 45000,
                 "Professional fees": 3250,

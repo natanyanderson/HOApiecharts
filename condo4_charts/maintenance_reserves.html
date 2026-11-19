@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Falcon Report: Maintenance and Reserve Analysis</title>
+    <title>Falcon/Becht Report: Maintenance and Reserve Analysis</title>
     <script type="text/javascript">
 
         function loadScript(url, callback) {
@@ -108,6 +108,8 @@
                     name: year,
                     value: details.expenses || 0, // Use 0 if expenses are undefined
                     description: descriptionLines || 'No maintenance data',
+                    contribution: details.full_contribution,
+                    ltmBalance: details.closing_balances ? details.closing_balances["Long-Term Maintenance"] : undefined,
                     itemStyle: { color: inscheduledata.colors[yearIndex % inscheduledata.colors.length] },
                     label: { show: true, position: 'right' }
                 });
@@ -120,7 +122,8 @@
             var option = {
                 baseOption: {
                     title: {
-                        text: 'Falcon Report: Maintenance schedules and reserve analysis',
+                        text: 'Falcon/Becht Report: Maintenance schedules and reserve analysis',
+                        subtext: 'Becht 2026 study / Falcon 2022 allocations; costs inflated 3%/yr. Unaudited estimates.',
                         left: 'center',
                         top: 20,
                         textStyle: {
@@ -132,7 +135,14 @@
                     tooltip: {
                         trigger: 'item',
                         formatter: function (params) {
-                            return `YEAR: ${params.name}<br/>TOTAL: ${formatCurrency(params.value)}<br/>Details: ${params.data.description}`;
+                            let text = `YEAR: ${params.name}<br/>TOTAL: ${formatCurrency(params.value)}<br/>Details: ${params.data.description}`;
+                            if (params.data.contribution !== undefined) {
+                                text += `<br/>Reserve contributions: ${formatCurrency(params.data.contribution)}`;
+                            }
+                            if (params.data.ltmBalance !== undefined) {
+                                text += `<br/>Long-Term Maintenance balance (year end): ${formatCurrency(params.data.ltmBalance)}`;
+                            }
+                            return text;
                         }
                     },
                     grid: {

@@ -61,7 +61,7 @@
         let password = '';
 
         // Define the range of years for the files
-        const years = Array.from({length: 19}, (_, i) => 2006 + i);
+        const years = Array.from({length: 20}, (_, i) => 2006 + i);
 
         // Get dropdown elements
         const year1Dropdown = document.getElementById('year1');
@@ -82,7 +82,7 @@
 
         // Set initial values
         year1Dropdown.value = 2006;
-        year2Dropdown.value = 2024;
+        year2Dropdown.value = 2025;
 
         // Prompt for password and update iframes when password is entered
         function submitPassword() {
